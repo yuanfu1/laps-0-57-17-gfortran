@@ -1,0 +1,54 @@
+This file contains any messages produced by compilers while
+running configure, to aid debugging if configure makes a mistake.
+
+configure:680: checking for gcc
+configure:757: checking whether the C compiler (gcc  -L/opt/homebrew/lib) works
+configure:771: gcc -o conftest  -I/opt/homebrew/include -Dunknown -L/opt/homebrew/lib conftest.c  1>&5
+configure:768:1: warning: type specifier missing, defaults to 'int' [-Wimplicit-int]
+main(){return(0);}
+^
+1 warning generated.
+configure:791: checking whether the C compiler (gcc  -L/opt/homebrew/lib) is a cross-compiler
+configure:796: checking whether we are using GNU C
+configure:820: checking whether gcc accepts -g
+configure:865: checking for ncdump
+configure:931: checking for perl
+configure:962: checking for perl
+configure:996: checking for csh
+configure:1027: checking for csh
+configure:1056: checking how to run the C preprocessor
+configure:1118: checking whether gcc needs -traditional
+configure:1364: checking to see if gfortran recognizes type byte as unsigned
+configure:1387: checking to see if gfortran recognizes type byte as signed
+configure:1411: checking to see if gfortran recognizes type integer*1
+configure:1620: checking For intrinsic degree based trig functions in gfortran
+configure:1765: checking how to compile with ncar graphics
+configure:1771: checking for ncargf77
+configure:1861: checking whether make sets ${MAKE}
+configure:1890: checking for ranlib
+configure:1928: checking for main in -lz
+configure:1971: checking for main in -lpng
+configure:2014: checking for main in -ljasper
+configure:2082: checking for dirent.h that defines DIR
+configure:2120: checking for opendir in -ldir
+configure:2203: checking for ANSI C header files
+configure:2310: checking for fcntl.h
+configure:2310: checking for malloc.h
+configure:2310: checking for strings.h
+configure:2310: checking for sys/ioctl.h
+configure:2310: checking for sys/time.h
+configure:2310: checking for unistd.h
+configure:2348: checking whether byte ordering is bigendian
+configure:2438: checking size of short
+configure:2477: checking size of int
+configure:2516: checking size of long
+configure:2556: checking for working const
+configure:2631: checking for off_t
+configure:2664: checking for size_t
+configure:2697: checking whether struct tm is in sys/time.h or time.h
+configure:2734: checking for working alloca.h
+configure:2767: checking for alloca
+configure:2961: checking return type of signal handlers
+configure:3004: checking for gettimeofday
+configure:3004: checking for re_comp
+configure:3004: checking for regcomp

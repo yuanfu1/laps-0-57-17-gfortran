@@ -1,0 +1,22 @@
+#
+# Most of the @...@ substitutions are performed by 'configure'.
+# The remaining ones can be done either manually or by running 'cronfile.pl'.
+#
+# These remaining ones are...
+# @ laps_data_root @              path to $LAPS_DATA_ROOT
+# @ followup @                    can be used with a ';' to run your own followup script after the 'sched.pl'.
+#
+#
+20                      * * * *  /usr/bin/perl /Users/xiey/developments/da/laps/lapsinstallroot/etc/sched.pl                              /Users/xiey/developments/da/laps/lapsinstallroot @laps_data_root@ 
+03,10,19,26,34,39,49,55 * * * *  /usr/bin/perl /Users/xiey/developments/da/laps/lapsinstallroot/etc/laps_driver.pl vrc_driver.x           /Users/xiey/developments/da/laps/lapsinstallroot @laps_data_root@ > /dev/null 2>&1
+08,14,23,29,38,45,53,59 * * * *  /usr/bin/perl /Users/xiey/developments/da/laps/lapsinstallroot/etc/laps_driver.pl lvd_sat_ingest.exe     /Users/xiey/developments/da/laps/lapsinstallroot @laps_data_root@ > /dev/null 2>&1
+22,30                   * * * *  /usr/bin/perl /Users/xiey/developments/da/laps/lapsinstallroot/etc/laps_driver.pl lsr_driver.exe         /Users/xiey/developments/da/laps/lapsinstallroot @laps_data_root@ > /dev/null 2>&1
+#02,12,22,32,42,52       * * * *  /usr/bin/perl /Users/xiey/developments/da/laps/lapsinstallroot/etc/laps_driver.pl ln3_driver.exe         /Users/xiey/developments/da/laps/lapsinstallroot @laps_data_root@ > /dev/null 2>&1
+
+# Accepts radar data from polar NetCDF files
+00,05,10,15,20,25,30,35,40,45,50,55   * * * *  /usr/bin/perl /Users/xiey/developments/da/laps/lapsinstallroot/etc/laps_driver.pl remap_polar_netcdf.exe /Users/xiey/developments/da/laps/lapsinstallroot @laps_data_root@ > /dev/null 2>&1
+
+# Accepts real-time radar data from archive-II files
+#00,05,10,15,20,25,30,35,40,45,50,55   * * * *  /usr/bin/perl /Users/xiey/developments/da/laps/lapsinstallroot/etc/laps_driver.pl wideband2nc.csh /Users/xiey/developments/da/laps/lapsinstallroot @laps_data_root@ > /dev/null 2>&1
+
+#40                      * * * *  /bin/csh  /Users/xiey/developments/da/laps/lapsinstallroot/etc/topc.csh  @laps_data_root@/log

@@ -1,0 +1,977 @@
+
+ *********************************************************
+ *                                                       *
+ *             STMAS: analysis begins                    *
+ *                                                       *
+ *********************************************************
+
+ ---------------------------------------------------------
+ |                                                       |
+ |             STMAS: Reading namelist                   |
+ |                                                       |
+ ---------------------------------------------------------
+STMAS>read_namelist:   Start levels:  17 17 21  3 Number of multigrid levels:  4
+        Seconds before analysis time:    -7200 Seconds after:        0
+STMAS>read_namelist:   Number of analysis variables:   6
+
+ ---------------------------------------------------------
+ |                                                       |
+ |            STMAS: Calling STMAS_LAPS_INPUT            |
+ |                                                       |
+ ---------------------------------------------------------
+  Sort_fn: names sorted, non_numeric/total =           204          204
+
+ ======> Read_namelist_laps: lapsparms            0
+ ======>          File_name: /data/fab/stmas/stmas4d/static//nest7grid.parms
+
+ /data/fab/stmas/stmas4d/static/ get_laps_config - parameters read in OK
+
+STMAS_LAPS_input:   Requested time window: from 20111228_1900 to 20111228_2100
+
+ laps_i4time   1640725200
+ Here: get_grid_dim_xy
+ Horizontal gridspacing:    9000.000        9000.000    
+ Time:     3600.000    
+STMAS_LAPS_input:   Number of gridpoints of the analysis grid:   153  141   21    3
+
+ ------------------------------------------------------------
+ |                                                          |
+ |    STMAS_LAPS_input: array allocation                    |
+ |                                                          |
+ ------------------------------------------------------------
+ memo_alloc          153          141           21            3
+
+ ------------------------------------------------------------
+ |                                                          |
+ |    STMAS_LAPS_input: get_LAPS_config:                    |
+ |                      Lat/Lon/Topography/Land/Map-factor  |
+ |                                                          |
+ ------------------------------------------------------------
+
+ STMAS>LAPS_ingest>get_LAPS_config:     Surface Missing/Bad flags:  
+   9.9999999E+36   -99.90000    
+     Reading in static grid: LAT
+cdf_read_grid: data variable name = imax
+cdf_read_grid: data variable name = jmax
+cdf_read_grid: data variable name = n_grids
+cdf_read_grid: data variable name = grid_spacing
+read_cdf_static: 153 141 38 153 141 1
+cdf_retrieve_laps: units >DEGREES<
+a write_cdf_static: 3 0 >lat< >Lat: From MODEL by J. Smart/ S. Albers 2-03< 126 >DEGREES< 11 
+     Reading in static grid: LON
+cdf_read_grid: data variable name = imax
+cdf_read_grid: data variable name = jmax
+cdf_read_grid: data variable name = n_grids
+cdf_read_grid: data variable name = grid_spacing
+read_cdf_static: 153 141 38 153 141 1
+cdf_retrieve_laps: units >DEGREES<
+a write_cdf_static: 3 1 >lon< >Lon: From MODEL by J. Smart/ S. Albers 2-03< 126 >DEGREES< 11 
+     Reading in static grid: AVG
+cdf_read_grid: data variable name = imax
+cdf_read_grid: data variable name = jmax
+cdf_read_grid: data variable name = n_grids
+cdf_read_grid: data variable name = grid_spacing
+read_cdf_static: 153 141 38 153 141 1
+cdf_retrieve_laps: units >METERS MSL<
+a write_cdf_static: 3 2 >avg< >Average terrain elevation (m) < 126 >METERS MSL< 11 
+     Reading in static grid: LDF
+cdf_read_grid: data variable name = imax
+cdf_read_grid: data variable name = jmax
+cdf_read_grid: data variable name = n_grids
+cdf_read_grid: data variable name = grid_spacing
+read_cdf_static: 153 141 38 153 141 1
+cdf_retrieve_laps: units >none<
+a write_cdf_static: 3 6 >ldf< >Land Fraction: derived from USGS land use < 126 >none< 11 
+
+ STMAS>LAPS_ingest>get_LAPS_config:     
+ Maximum number of surface stations allowed:           750
+
+ ======> Read_namelist_laps: wind           21
+ ======>          File_name: /data/fab/stmas/stmas4d/static/wind.nl
+
+
+ ======> Read_namelist_laps: lapsparms           21
+ ======>          File_name: /data/fab/stmas/stmas4d/static//nest7grid.parms
+
+
+ ------------------------------------------------------------
+ |                                                          |
+ |    STMAS_LAPS_input: get_LAPS_back                       |
+ |                                                          |
+ ------------------------------------------------------------
+
+  Searching for model background valid at: 113621900 lga   U3 
+  Sort_fn: names sorted, non_numeric/total =             0           14
+  Found file for: 1136212000700 lga   U3 
+ Reading 3d /data/fab/stmas/stmas4d/lapsprd/lga/   lga U3 
+  Reading Sigma Ht Levels
+  Successfully obtained: 1136212000700 lga   U3 
+  Exiting get_modelfg_3d_sub
+
+ file obtained in get_modelfg_3d_sub - return
+U3    0.31893E+01
+
+  Searching for model background valid at: 113621900 lga   V3 
+  Sort_fn: names sorted, non_numeric/total =             0           14
+  Found file for: 1136212000700 lga   V3 
+ Reading 3d /data/fab/stmas/stmas4d/lapsprd/lga/   lga V3 
+  Reading Sigma Ht Levels
+  Successfully obtained: 1136212000700 lga   V3 
+  Exiting get_modelfg_3d_sub
+
+ file obtained in get_modelfg_3d_sub - return
+V3    0.33911E+01
+
+  Searching for model background valid at: 113621900 lga   W3 
+  Sort_fn: names sorted, non_numeric/total =             0           14
+  Found file for: 1136212000700 lga   W3 
+ Reading 3d /data/fab/stmas/stmas4d/lapsprd/lga/   lga W3 
+  Reading Sigma Ht Levels
+  Successfully obtained: 1136212000700 lga   W3 
+  Exiting get_modelfg_3d_sub
+
+ file obtained in get_modelfg_3d_sub - return
+W3    0.11532E-01
+
+  Searching for model background valid at: 113621900 lga   P3 
+  Sort_fn: names sorted, non_numeric/total =             0           14
+  Found file for: 1136212000700 lga   P3 
+ Reading 3d /data/fab/stmas/stmas4d/lapsprd/lga/   lga P3 
+  Reading Sigma Ht Levels
+  Successfully obtained: 1136212000700 lga   P3 
+  Exiting get_modelfg_3d_sub
+
+ file obtained in get_modelfg_3d_sub - return
+P3    0.33171E+05
+
+  Searching for model background valid at: 113621900 lga   T3 
+  Sort_fn: names sorted, non_numeric/total =             0           14
+  Found file for: 1136212000700 lga   T3 
+ Reading 3d /data/fab/stmas/stmas4d/lapsprd/lga/   lga T3 
+  Reading Sigma Ht Levels
+  Successfully obtained: 1136212000700 lga   T3 
+  Exiting get_modelfg_3d_sub
+
+ file obtained in get_modelfg_3d_sub - return
+T3    0.24918E+03
+
+  Searching for model background valid at: 113621900 lga   SH 
+  Sort_fn: names sorted, non_numeric/total =             0           14
+  Found file for: 1136212000700 lga   SH 
+ Reading 3d /data/fab/stmas/stmas4d/lapsprd/lga/   lga SH 
+  Reading Sigma Ht Levels
+  Successfully obtained: 1136212000700 lga   SH 
+  Exiting get_modelfg_3d_sub
+
+ file obtained in get_modelfg_3d_sub - return
+SH    0.42762E-03
+
+  Searching for model background valid at: 113622000 lga   U3 
+  Sort_fn: names sorted, non_numeric/total =             0           14
+  Found file for: 1136212000800 lga   U3 
+ Reading 3d /data/fab/stmas/stmas4d/lapsprd/lga/   lga U3 
+  Reading Sigma Ht Levels
+  Successfully obtained: 1136212000800 lga   U3 
+  Exiting get_modelfg_3d_sub
+
+ file obtained in get_modelfg_3d_sub - return
+U3    0.35654E+01
+
+  Searching for model background valid at: 113622000 lga   V3 
+  Sort_fn: names sorted, non_numeric/total =             0           14
+  Found file for: 1136212000800 lga   V3 
+ Reading 3d /data/fab/stmas/stmas4d/lapsprd/lga/   lga V3 
+  Reading Sigma Ht Levels
+  Successfully obtained: 1136212000800 lga   V3 
+  Exiting get_modelfg_3d_sub
+
+ file obtained in get_modelfg_3d_sub - return
+V3    0.28659E+01
+
+  Searching for model background valid at: 113622000 lga   W3 
+  Sort_fn: names sorted, non_numeric/total =             0           14
+  Found file for: 1136212000800 lga   W3 
+ Reading 3d /data/fab/stmas/stmas4d/lapsprd/lga/   lga W3 
+  Reading Sigma Ht Levels
+  Successfully obtained: 1136212000800 lga   W3 
+  Exiting get_modelfg_3d_sub
+
+ file obtained in get_modelfg_3d_sub - return
+W3    0.14732E-01
+
+  Searching for model background valid at: 113622000 lga   P3 
+  Sort_fn: names sorted, non_numeric/total =             0           14
+  Found file for: 1136212000800 lga   P3 
+ Reading 3d /data/fab/stmas/stmas4d/lapsprd/lga/   lga P3 
+  Reading Sigma Ht Levels
+  Successfully obtained: 1136212000800 lga   P3 
+  Exiting get_modelfg_3d_sub
+
+ file obtained in get_modelfg_3d_sub - return
+P3    0.33164E+05
+
+  Searching for model background valid at: 113622000 lga   T3 
+  Sort_fn: names sorted, non_numeric/total =             0           14
+  Found file for: 1136212000800 lga   T3 
+ Reading 3d /data/fab/stmas/stmas4d/lapsprd/lga/   lga T3 
+  Reading Sigma Ht Levels
+  Successfully obtained: 1136212000800 lga   T3 
+  Exiting get_modelfg_3d_sub
+
+ file obtained in get_modelfg_3d_sub - return
+T3    0.24894E+03
+
+  Searching for model background valid at: 113622000 lga   SH 
+  Sort_fn: names sorted, non_numeric/total =             0           14
+  Found file for: 1136212000800 lga   SH 
+ Reading 3d /data/fab/stmas/stmas4d/lapsprd/lga/   lga SH 
+  Reading Sigma Ht Levels
+  Successfully obtained: 1136212000800 lga   SH 
+  Exiting get_modelfg_3d_sub
+
+ file obtained in get_modelfg_3d_sub - return
+SH    0.46674E-03
+
+  Searching for model background valid at: 113622100 lga   U3 
+  Sort_fn: names sorted, non_numeric/total =             0           14
+  Found file for: 1136212000900 lga   U3 
+ Reading 3d /data/fab/stmas/stmas4d/lapsprd/lga/   lga U3 
+  Reading Sigma Ht Levels
+  Successfully obtained: 1136212000900 lga   U3 
+  Exiting get_modelfg_3d_sub
+
+ file obtained in get_modelfg_3d_sub - return
+U3    0.39425E+01
+
+  Searching for model background valid at: 113622100 lga   V3 
+  Sort_fn: names sorted, non_numeric/total =             0           14
+  Found file for: 1136212000900 lga   V3 
+ Reading 3d /data/fab/stmas/stmas4d/lapsprd/lga/   lga V3 
+  Reading Sigma Ht Levels
+  Successfully obtained: 1136212000900 lga   V3 
+  Exiting get_modelfg_3d_sub
+
+ file obtained in get_modelfg_3d_sub - return
+V3    0.23181E+01
+
+  Searching for model background valid at: 113622100 lga   W3 
+  Sort_fn: names sorted, non_numeric/total =             0           14
+  Found file for: 1136212000900 lga   W3 
+ Reading 3d /data/fab/stmas/stmas4d/lapsprd/lga/   lga W3 
+  Reading Sigma Ht Levels
+  Successfully obtained: 1136212000900 lga   W3 
+  Exiting get_modelfg_3d_sub
+
+ file obtained in get_modelfg_3d_sub - return
+W3    0.74561E-02
+
+  Searching for model background valid at: 113622100 lga   P3 
+  Sort_fn: names sorted, non_numeric/total =             0           14
+  Found file for: 1136212000900 lga   P3 
+ Reading 3d /data/fab/stmas/stmas4d/lapsprd/lga/   lga P3 
+  Reading Sigma Ht Levels
+  Successfully obtained: 1136212000900 lga   P3 
+  Exiting get_modelfg_3d_sub
+
+ file obtained in get_modelfg_3d_sub - return
+P3    0.33171E+05
+
+  Searching for model background valid at: 113622100 lga   T3 
+  Sort_fn: names sorted, non_numeric/total =             0           14
+  Found file for: 1136212000900 lga   T3 
+ Reading 3d /data/fab/stmas/stmas4d/lapsprd/lga/   lga T3 
+  Reading Sigma Ht Levels
+  Successfully obtained: 1136212000900 lga   T3 
+  Exiting get_modelfg_3d_sub
+
+ file obtained in get_modelfg_3d_sub - return
+T3    0.24874E+03
+
+  Searching for model background valid at: 113622100 lga   SH 
+  Sort_fn: names sorted, non_numeric/total =             0           14
+  Found file for: 1136212000900 lga   SH 
+ Reading 3d /data/fab/stmas/stmas4d/lapsprd/lga/   lga SH 
+  Reading Sigma Ht Levels
+  Successfully obtained: 1136212000900 lga   SH 
+  Exiting get_modelfg_3d_sub
+
+ file obtained in get_modelfg_3d_sub - return
+SH    0.50947E-03
+ ------------------------------------------------------------
+ |                                                          |
+ |    STMAS_LAPS_input: calculating Jacobian from sigma_ht  |
+ |                                                          |
+ ------------------------------------------------------------
+
+ ---------------------------------------------------------
+ |                                                       |
+ |            STMAS: Calling STMAS_Analyzing...          |
+ |                                                       |
+ ---------------------------------------------------------
+ mg, memo_alloc_mgrid            1           17           17           21 
+            3
+ grid4           17           17    304.3942    
+ 
+ minimization:            17           17           21            3
+RUNNING THE L-BFGS-B CODE
+
+           * * *
+
+Machine precision = 1.192D-07
+ N =        109242     M =             7
+ This problem is unconstrained.
+
+At X0         0 variables are exactly at the bounds
+func, mx: 0.258958E+02
+func, my: 0.473969E+02
+func, mz: 0.623367E+02
+func, ct: 0.885480E+02
+func, tv: 0.259383E+03
+func, qv: 0.289291E+03
+
+At iterate    0    f=  2.89291D+02    |proj g|=  1.36167D+03
+func, mx: 0.258958E+02
+func, my: 0.473969E+02
+func, mz: 0.623367E+02
+func, ct: 0.884045E+02
+func, tv: 0.258752E+03
+func, qv: 0.864623E+08
+func, mx: 0.258958E+02
+func, my: 0.473969E+02
+func, mz: 0.623367E+02
+func, ct: 0.885479E+02
+func, tv: 0.259382E+03
+func, qv: 0.289196E+03
+
+At iterate    1    f=  2.89196D+02    |proj g|=  3.86264D+03
+func, mx: 0.258958E+02
+func, my: 0.473969E+02
+func, mz: 0.623367E+02
+func, ct: 0.885479E+02
+func, tv: 0.259382E+03
+func, qv: 0.289099E+03
+
+At iterate    2    f=  2.89099D+02    |proj g|=  2.46726D+03
+func, mx: 0.258958E+02
+func, my: 0.473969E+02
+func, mz: 0.623367E+02
+func, ct: 0.885479E+02
+func, tv: 0.259382E+03
+func, qv: 0.288924E+03
+
+At iterate    3    f=  2.88924D+02    |proj g|=  2.46662D+03
+func, mx: 0.258958E+02
+func, my: 0.473969E+02
+func, mz: 0.623367E+02
+func, ct: 0.885479E+02
+func, tv: 0.259382E+03
+func, qv: 0.288688E+03
+
+At iterate    4    f=  2.88688D+02    |proj g|=  4.91339D+03
+func, mx: 0.258958E+02
+func, my: 0.473969E+02
+func, mz: 0.623367E+02
+func, ct: 0.885479E+02
+func, tv: 0.259382E+03
+func, qv: 0.288373E+03
+
+At iterate    5    f=  2.88373D+02    |proj g|=  6.25782D+03
+func, mx: 0.258958E+02
+func, my: 0.473969E+02
+func, mz: 0.623367E+02
+func, ct: 0.885478E+02
+func, tv: 0.259382E+03
+func, qv: 0.288046E+03
+
+At iterate    6    f=  2.88046D+02    |proj g|=  2.22745D+03
+func, mx: 0.258958E+02
+func, my: 0.473969E+02
+func, mz: 0.623367E+02
+func, ct: 0.885478E+02
+func, tv: 0.259382E+03
+func, qv: 0.287499E+03
+
+At iterate    7    f=  2.87499D+02    |proj g|=  1.96380D+03
+func, mx: 0.258958E+02
+func, my: 0.473969E+02
+func, mz: 0.623367E+02
+func, ct: 0.885477E+02
+func, tv: 0.259382E+03
+func, qv: 0.286958E+03
+
+At iterate    8    f=  2.86958D+02    |proj g|=  5.35961D+03
+func, mx: 0.258958E+02
+func, my: 0.473969E+02
+func, mz: 0.623367E+02
+func, ct: 0.885476E+02
+func, tv: 0.259382E+03
+func, qv: 0.286330E+03
+
+At iterate    9    f=  2.86330D+02    |proj g|=  5.00149D+03
+func, mx: 0.258958E+02
+func, my: 0.473969E+02
+func, mz: 0.623367E+02
+func, ct: 0.885476E+02
+func, tv: 0.259382E+03
+func, qv: 0.285794E+03
+
+At iterate   10    f=  2.85794D+02    |proj g|=  4.16810D+03
+ STMAS_minimizer:   Exit status: NEW_X     
+ copyto, from:           17           17           21            3
+ copyto, to:           17           17           21            3
+ copyto, final:          153          141           21            3
+ i2          129          129   0.7171936        287.4829    
+ mg, memo_alloc_mgrid            2           33           33           21 
+            3
+ STMAS_analysis>projection:   
+ inc            2            2            1            1
+ mgrid%incr            4            4            1            1
+ 
+ minimization:            33           33           21            3
+RUNNING THE L-BFGS-B CODE
+
+           * * *
+
+Machine precision = 1.192D-07
+ N =        411642     M =             7
+ This problem is unconstrained.
+
+At X0         0 variables are exactly at the bounds
+func, mx: 0.115229E+03
+func, my: 0.216221E+03
+func, mz: 0.284351E+03
+func, ct: 0.404018E+03
+func, tv: 0.132935E+04
+func, qv: 0.150304E+04
+
+At iterate    0    f=  1.50304D+03    |proj g|=  1.21663D+04
+func, mx: 0.115229E+03
+func, my: 0.216221E+03
+func, mz: 0.284351E+03
+func, ct: 0.403895E+03
+func, tv: 0.132893E+04
+func, qv: 0.212391E+09
+func, mx: 0.115229E+03
+func, my: 0.216221E+03
+func, mz: 0.284351E+03
+func, ct: 0.404018E+03
+func, tv: 0.132935E+04
+func, qv: 0.150074E+04
+
+At iterate    1    f=  1.50074D+03    |proj g|=  2.06498D+04
+func, mx: 0.115229E+03
+func, my: 0.216221E+03
+func, mz: 0.284351E+03
+func, ct: 0.404018E+03
+func, tv: 0.132935E+04
+func, qv: 0.149903E+04
+
+At iterate    2    f=  1.49903D+03    |proj g|=  8.39434D+03
+func, mx: 0.115229E+03
+func, my: 0.216221E+03
+func, mz: 0.284351E+03
+func, ct: 0.404018E+03
+func, tv: 0.132935E+04
+func, qv: 0.149744E+04
+
+At iterate    3    f=  1.49744D+03    |proj g|=  5.17837D+03
+func, mx: 0.115229E+03
+func, my: 0.216221E+03
+func, mz: 0.284351E+03
+func, ct: 0.404018E+03
+func, tv: 0.132935E+04
+func, qv: 0.149647E+04
+
+At iterate    4    f=  1.49647D+03    |proj g|=  1.71189D+04
+func, mx: 0.115229E+03
+func, my: 0.216221E+03
+func, mz: 0.284351E+03
+func, ct: 0.404018E+03
+func, tv: 0.132935E+04
+func, qv: 0.149543E+04
+
+At iterate    5    f=  1.49543D+03    |proj g|=  7.27220D+03
+func, mx: 0.115229E+03
+func, my: 0.216221E+03
+func, mz: 0.284351E+03
+func, ct: 0.404018E+03
+func, tv: 0.132935E+04
+func, qv: 0.149449E+04
+
+At iterate    6    f=  1.49449D+03    |proj g|=  4.05345D+03
+func, mx: 0.115229E+03
+func, my: 0.216221E+03
+func, mz: 0.284351E+03
+func, ct: 0.404018E+03
+func, tv: 0.132935E+04
+func, qv: 0.149322E+04
+
+At iterate    7    f=  1.49322D+03    |proj g|=  8.63801D+03
+func, mx: 0.115229E+03
+func, my: 0.216221E+03
+func, mz: 0.284351E+03
+func, ct: 0.404018E+03
+func, tv: 0.132935E+04
+func, qv: 0.149180E+04
+
+At iterate    8    f=  1.49180D+03    |proj g|=  1.59520D+04
+func, mx: 0.115229E+03
+func, my: 0.216221E+03
+func, mz: 0.284351E+03
+func, ct: 0.404018E+03
+func, tv: 0.132935E+04
+func, qv: 0.149023E+04
+
+At iterate    9    f=  1.49023D+03    |proj g|=  6.68982D+03
+func, mx: 0.115229E+03
+func, my: 0.216221E+03
+func, mz: 0.284351E+03
+func, ct: 0.404018E+03
+func, tv: 0.132935E+04
+func, qv: 0.148840E+04
+
+At iterate   10    f=  1.48840D+03    |proj g|=  4.84652D+03
+ STMAS_minimizer:   Exit status: NEW_X     
+ copyto, from:           33           33           21            3
+ copyto, to:           33           33           21            3
+ copyto, final:          153          141           21            3
+ i2          129          129   0.7171936        287.4829    
+ mg, memo_alloc_mgrid            3           65           65           21 
+            3
+ STMAS_analysis>projection:   
+ inc            2            2            1            1
+ mgrid%incr            2            2            1            1
+ 
+ minimization:            65           65           21            3
+RUNNING THE L-BFGS-B CODE
+
+           * * *
+
+Machine precision = 1.192D-07
+ N =       1597050     M =             7
+ This problem is unconstrained.
+
+At X0         0 variables are exactly at the bounds
+func, mx: 0.453099E+03
+func, my: 0.979638E+03
+func, mz: 0.125536E+04
+func, ct: 0.172441E+04
+func, tv: 0.505577E+04
+func, qv: 0.586372E+04
+
+At iterate    0    f=  5.86372D+03    |proj g|=  8.92519D+03
+func, mx: 0.453099E+03
+func, my: 0.979637E+03
+func, mz: 0.125536E+04
+func, ct: 0.172395E+04
+func, tv: 0.505449E+04
+func, qv: 0.996022E+08
+func, mx: 0.453099E+03
+func, my: 0.979638E+03
+func, mz: 0.125536E+04
+func, ct: 0.172441E+04
+func, tv: 0.505577E+04
+func, qv: 0.585532E+04
+
+At iterate    1    f=  5.85532D+03    |proj g|=  3.15584D+04
+func, mx: 0.453099E+03
+func, my: 0.979638E+03
+func, mz: 0.125536E+04
+func, ct: 0.172441E+04
+func, tv: 0.505577E+04
+func, qv: 0.584881E+04
+
+At iterate    2    f=  5.84881D+03    |proj g|=  1.35760D+04
+func, mx: 0.453099E+03
+func, my: 0.979638E+03
+func, mz: 0.125536E+04
+func, ct: 0.172441E+04
+func, tv: 0.505577E+04
+func, qv: 0.584393E+04
+
+At iterate    3    f=  5.84393D+03    |proj g|=  1.45705D+04
+func, mx: 0.453099E+03
+func, my: 0.979638E+03
+func, mz: 0.125536E+04
+func, ct: 0.172441E+04
+func, tv: 0.505577E+04
+func, qv: 0.583600E+04
+
+At iterate    4    f=  5.83600D+03    |proj g|=  2.01862D+04
+func, mx: 0.453099E+03
+func, my: 0.979638E+03
+func, mz: 0.125536E+04
+func, ct: 0.172441E+04
+func, tv: 0.505577E+04
+func, qv: 0.582881E+04
+
+At iterate    5    f=  5.82881D+03    |proj g|=  4.58087D+04
+func, mx: 0.453099E+03
+func, my: 0.979638E+03
+func, mz: 0.125536E+04
+func, ct: 0.172441E+04
+func, tv: 0.505577E+04
+func, qv: 0.582030E+04
+
+At iterate    6    f=  5.82030D+03    |proj g|=  2.15681D+04
+func, mx: 0.453099E+03
+func, my: 0.979638E+03
+func, mz: 0.125536E+04
+func, ct: 0.172441E+04
+func, tv: 0.505576E+04
+func, qv: 0.580771E+04
+
+At iterate    7    f=  5.80771D+03    |proj g|=  1.89228D+04
+func, mx: 0.453099E+03
+func, my: 0.979638E+03
+func, mz: 0.125536E+04
+func, ct: 0.172441E+04
+func, tv: 0.505576E+04
+func, qv: 0.579521E+04
+
+At iterate    8    f=  5.79521D+03    |proj g|=  2.98667D+04
+func, mx: 0.453099E+03
+func, my: 0.979638E+03
+func, mz: 0.125536E+04
+func, ct: 0.172441E+04
+func, tv: 0.505576E+04
+func, qv: 0.577581E+04
+
+At iterate    9    f=  5.77581D+03    |proj g|=  6.89452D+04
+func, mx: 0.453099E+03
+func, my: 0.979638E+03
+func, mz: 0.125536E+04
+func, ct: 0.172441E+04
+func, tv: 0.505576E+04
+func, qv: 0.575223E+04
+
+At iterate   10    f=  5.75223D+03    |proj g|=  2.99742D+04
+ STMAS_minimizer:   Exit status: NEW_X     
+ copyto, from:           65           65           21            3
+ copyto, to:           65           65           21            3
+ copyto, final:          153          141           21            3
+ i2          129          129   0.7171936        287.4829    
+ mg, memo_alloc_mgrid            4          129          129           21 
+            3
+ STMAS_analysis>projection:   
+ inc            2            2            1            1
+ mgrid%incr            1            1            1            1
+ 
+ minimization:           129          129           21            3
+RUNNING THE L-BFGS-B CODE
+
+           * * *
+
+Machine precision = 1.192D-07
+ N =       6290298     M =             7
+ This problem is unconstrained.
+
+At X0         0 variables are exactly at the bounds
+func, mx: 0.189587E+04
+func, my: 0.401937E+04
+func, mz: 0.513774E+04
+func, ct: 0.704543E+04
+func, tv: 0.207175E+05
+func, qv: 0.245641E+05
+ func:smooth     24564.06    
+
+At iterate    0    f=  2.45641D+04    |proj g|=  3.01832D+04
+func, mx: 0.189587E+04
+func, my: 0.401937E+04
+func, mz: 0.513774E+04
+func, ct: 0.704481E+04
+func, tv: 0.207159E+05
+func, qv: 0.126198E+09
+ func:smooth    1.2619790E+08
+func, mx: 0.189587E+04
+func, my: 0.401937E+04
+func, mz: 0.513774E+04
+func, ct: 0.704543E+04
+func, tv: 0.207175E+05
+func, qv: 0.244901E+05
+ func:smooth     24490.10    
+
+At iterate    1    f=  2.44901D+04    |proj g|=  1.54237D+05
+func, mx: 0.189587E+04
+func, my: 0.401937E+04
+func, mz: 0.513774E+04
+func, ct: 0.704543E+04
+func, tv: 0.207175E+05
+func, qv: 0.244146E+05
+ func:smooth     24414.64    
+
+At iterate    2    f=  2.44146D+04    |proj g|=  3.16141D+04
+func, mx: 0.189587E+04
+func, my: 0.401937E+04
+func, mz: 0.513774E+04
+func, ct: 0.704543E+04
+func, tv: 0.207175E+05
+func, qv: 0.243576E+05
+ func:smooth     24357.62    
+
+At iterate    3    f=  2.43576D+04    |proj g|=  2.59833D+04
+func, mx: 0.189587E+04
+func, my: 0.401937E+04
+func, mz: 0.513774E+04
+func, ct: 0.704543E+04
+func, tv: 0.207175E+05
+func, qv: 0.242936E+05
+ func:smooth     24293.58    
+
+At iterate    4    f=  2.42936D+04    |proj g|=  7.85561D+04
+func, mx: 0.189587E+04
+func, my: 0.401937E+04
+func, mz: 0.513774E+04
+func, ct: 0.704543E+04
+func, tv: 0.207175E+05
+func, qv: 0.242012E+05
+ func:smooth     24201.24    
+
+At iterate    5    f=  2.42012D+04    |proj g|=  7.96112D+04
+func, mx: 0.189587E+04
+func, my: 0.401937E+04
+func, mz: 0.513774E+04
+func, ct: 0.704542E+04
+func, tv: 0.207175E+05
+func, qv: 0.241093E+05
+ func:smooth     24109.33    
+
+At iterate    6    f=  2.41093D+04    |proj g|=  8.92903D+04
+func, mx: 0.189587E+04
+func, my: 0.401937E+04
+func, mz: 0.513774E+04
+func, ct: 0.704542E+04
+func, tv: 0.207175E+05
+func, qv: 0.240164E+05
+ func:smooth     24016.37    
+
+At iterate    7    f=  2.40164D+04    |proj g|=  5.27908D+04
+func, mx: 0.189587E+04
+func, my: 0.401937E+04
+func, mz: 0.513774E+04
+func, ct: 0.704542E+04
+func, tv: 0.207174E+05
+func, qv: 0.239175E+05
+ func:smooth     23917.45    
+
+At iterate    8    f=  2.39175D+04    |proj g|=  7.93457D+04
+func, mx: 0.189587E+04
+func, my: 0.401937E+04
+func, mz: 0.513774E+04
+func, ct: 0.704542E+04
+func, tv: 0.207174E+05
+func, qv: 0.238169E+05
+ func:smooth     23816.93    
+
+At iterate    9    f=  2.38169D+04    |proj g|=  1.05280D+05
+func, mx: 0.189587E+04
+func, my: 0.401937E+04
+func, mz: 0.513774E+04
+func, ct: 0.704541E+04
+func, tv: 0.207174E+05
+func, qv: 0.237002E+05
+ func:smooth     23700.20    
+
+At iterate   10    f=  2.37002D+04    |proj g|=  5.89855D+04
+ STMAS_minimizer:   Exit status: NEW_X     
+ copyto, from:          129          129           21            3
+ copyto, to:          129          129           21            3
+ copyto, final:          153          141           21            3
+ i2          129          129   0.7171936        287.4829    
+ +------------------------------------------------------------------------+
+ STMAS_analysis:   Additional analysis at the final grid
+ +------------------------------------------------------------------------+
+ grid4          153          141   -1.709595    
+ final-tmgrid          129          129           21            3
+ final-num          153          141           21            3
+ final-tot    318.5157    
+ 
+ minimization:           153          141           21            3
+RUNNING THE L-BFGS-B CODE
+
+           * * *
+
+Machine precision = 1.192D-07
+ N =       8154594     M =             7
+ This problem is unconstrained.
+
+At X0         0 variables are exactly at the bounds
+func, mx: 0.202899E+04
+func, my: 0.450442E+04
+func, mz: 0.584392E+04
+func, ct: 0.115247E+05
+func, tv: 0.378006E+05
+func, qv: 0.497192E+05
+ func:smooth     49719.23    
+
+At iterate    0    f=  4.97192D+04    |proj g|=  7.00195D+04
+func, mx: 0.202899E+04
+func, my: 0.450442E+04
+func, mz: 0.584392E+04
+func, ct: 0.115241E+05
+func, tv: 0.377987E+05
+func, qv: 0.473544E+09
+ func:smooth    4.7354445E+08
+func, mx: 0.202899E+04
+func, my: 0.450442E+04
+func, mz: 0.584392E+04
+func, ct: 0.115247E+05
+func, tv: 0.378006E+05
+func, qv: 0.494773E+05
+ func:smooth     49477.32    
+
+At iterate    1    f=  4.94773D+04    |proj g|=  1.07239D+05
+func, mx: 0.202899E+04
+func, my: 0.450442E+04
+func, mz: 0.584392E+04
+func, ct: 0.115247E+05
+func, tv: 0.378006E+05
+func, qv: 0.493108E+05
+ func:smooth     49310.81    
+
+At iterate    2    f=  4.93108D+04    |proj g|=  5.43586D+04
+func, mx: 0.202899E+04
+func, my: 0.450442E+04
+func, mz: 0.584392E+04
+func, ct: 0.115247E+05
+func, tv: 0.378006E+05
+func, qv: 0.491219E+05
+ func:smooth     49121.87    
+
+At iterate    3    f=  4.91219D+04    |proj g|=  4.34004D+04
+func, mx: 0.202899E+04
+func, my: 0.450442E+04
+func, mz: 0.584392E+04
+func, ct: 0.115247E+05
+func, tv: 0.378006E+05
+func, qv: 0.490099E+05
+ func:smooth     49009.89    
+
+At iterate    4    f=  4.90099D+04    |proj g|=  1.64669D+05
+func, mx: 0.202899E+04
+func, my: 0.450442E+04
+func, mz: 0.584392E+04
+func, ct: 0.115247E+05
+func, tv: 0.378006E+05
+func, qv: 0.488791E+05
+ func:smooth     48879.10    
+
+At iterate    5    f=  4.88791D+04    |proj g|=  4.93740D+04
+func, mx: 0.202899E+04
+func, my: 0.450442E+04
+func, mz: 0.584392E+04
+func, ct: 0.115247E+05
+func, tv: 0.378006E+05
+func, qv: 0.486921E+05
+ func:smooth     48692.05    
+
+At iterate    6    f=  4.86921D+04    |proj g|=  4.45374D+04
+func, mx: 0.202899E+04
+func, my: 0.450442E+04
+func, mz: 0.584392E+04
+func, ct: 0.115247E+05
+func, tv: 0.378005E+05
+func, qv: 0.485330E+05
+ func:smooth     48532.98    
+
+At iterate    7    f=  4.85330D+04    |proj g|=  1.75466D+05
+func, mx: 0.202899E+04
+func, my: 0.450442E+04
+func, mz: 0.584392E+04
+func, ct: 0.115247E+05
+func, tv: 0.378005E+05
+func, qv: 0.482790E+05
+ func:smooth     48279.01    
+
+At iterate    8    f=  4.82790D+04    |proj g|=  1.71128D+05
+func, mx: 0.202899E+04
+func, my: 0.450442E+04
+func, mz: 0.584392E+04
+func, ct: 0.115247E+05
+func, tv: 0.378005E+05
+func, qv: 0.480264E+05
+ func:smooth     48026.36    
+
+At iterate    9    f=  4.80264D+04    |proj g|=  1.95389D+05
+func, mx: 0.202899E+04
+func, my: 0.450442E+04
+func, mz: 0.584392E+04
+func, ct: 0.115247E+05
+func, tv: 0.378005E+05
+func, qv: 0.478109E+05
+ func:smooth     47810.93    
+
+At iterate   10    f=  4.78109D+04    |proj g|=  1.16681D+05
+ STMAS_minimizer:   Exit status: NEW_X     
+ k            2    101505.6        296.5503    
+ k            3    101271.9        296.5503    
+ k            4    100458.0        296.5503    
+ k            5    98164.47        295.1674    
+ k            6    95910.58        293.4425    
+ k            7    90508.12        290.2971    
+ k            8    80450.63        287.2526    
+ k            9    71367.61        283.3692    
+ k           10    63276.81        278.3470    
+ k           11    55899.98        273.0894    
+ k           12    49295.73        267.7661    
+ k           13    43327.04        261.9184    
+ k           14    37984.77        255.6488    
+ k           15    33170.38        248.7159    
+ k           16    28853.41        241.4060    
+ k           17    21521.06        224.2421    
+ k           18    15687.52        208.9096    
+ k           19    11173.39        193.7131    
+ k           20    7792.883        188.9613    
+ k           21    5427.243        188.9613    
+ k            2    101478.3        296.5644    
+ k            3    101244.6        296.5644    
+ k            4    100431.1        296.5644    
+ k            5    98138.02        295.1286    
+ k            6    95884.28        293.3634    
+ k            7    90481.24        290.3273    
+ k            8    80435.04        287.6324    
+ k            9    71362.19        283.5495    
+ k           10    63263.22        278.4396    
+ k           11    55889.57        273.1206    
+ k           12    49286.71        267.7386    
+ k           13    43318.23        261.8609    
+ k           14    37974.98        255.6541    
+ k           15    33163.79        248.9339    
+ k           16    28853.53        241.7439    
+ k           17    21527.22        224.4460    
+ k           18    15695.53        209.0527    
+ k           19    11181.35        193.8391    
+ k           20    7799.685        189.0521    
+ k           21    5432.923        189.0521    
+ k            2    101437.6        296.5113    
+ k            3    101204.0        296.5113    
+ k            4    100390.6        296.5113    
+ k            5    98097.86        295.0422    
+ k            6    95844.39        293.2743    
+ k            7    90441.10        290.3494    
+ k            8    80400.90        287.8831    
+ k            9    71339.24        283.7900    
+ k           10    63246.17        278.6775    
+ k           11    55880.50        273.3615    
+ k           12    49286.40        267.9720    
+ k           13    43321.93        262.0044    
+ k           14    37979.11        255.7902    
+ k           15    33170.87        249.1903    
+ k           16    28866.45        242.0639    
+ k           17    21543.82        224.6705    
+ k           18    15710.76        209.1212    
+ k           19    11193.83        194.0268    
+ k           20    7810.598        189.2448    
+ k           21    5442.529        189.2448    
+
+ ---------------------------------------------------------
+ |                                                       |
+ |             STMAS: Deallocating memory                |
+ |                                                       |
+ ---------------------------------------------------------
+
+ *********************************************************
+ *                                                       *
+ *            STMAS analysis succeeds                    *
+ *                                                       *
+ *********************************************************

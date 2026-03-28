@@ -1,0 +1,94 @@
+# User options are in src/include/makefile.inc
+# This Makefile is designed for gnu make version 3.75 or newer
+# Please report problems to lapsbugs@fsl.noaa.gov
+#
+#
+
+#=============================================================
+#  LAPS environment:
+#=============================================================
+
+SRCROOT=../..
+
+# make can't find pgf90, modify makefile.inc and copy to this dir. HJ 4/28/2011
+include $(SRCROOT)/src/include/makefile.inc
+
+RM = rm -f
+
+FLAG = $(FFLAGS)
+
+LAPSLIBS = $(SRCROOT)/src/lib/liblaps.a  \
+           $(SRCROOT)/src/lib/modules/libmodules.a  \
+           $(SRCROOT)/src/lib/mthermo/libmthermo.a  \
+           $(SRCROOT)/src/lib/util/libutil.a  \
+           $(SRCROOT)/src/lib/goeslib/libgoeslib.a \
+           $(SRCROOT)/src/stmas4d/normal_subs/libnormal_subs.a \
+           $(SRCROOT)/src/stmas4d/observations/libstmas4d_obs.a 
+
+DBLAPSLIBS = $(SRCROOT)/src/lib/libdebuglaps.a  \
+             $(SRCROOT)/src/lib/modules/libdebugmodules.a  \
+             $(SRCROOT)/src/lib/mthermo/libdebugmthermo.a  \
+             $(SRCROOT)/src/lib/util/libdebugutil.a  \
+             $(SRCROOT)/src/lib/goeslib/libdebuggoeslib.a \
+	     $(SRCROOT)/src/stmas4d/normal_subs/libnormal_subs_debug.a \
+	     $(SRCROOT)/src/stmas4d/observations/libstmas4d_obs.a
+
+LAPSFC = $(SRCROOT)/src/sfc/libsfc.a
+#STINC = -Inormal_subs -Iobservations
+STINC = -Inormal_subs
+
+#=============================================================
+# STMAS:
+#=============================================================
+
+EXE = STMAS4D.exe
+ARC = STMAS4D.a
+
+OBJ=$(ARC)(STMAS_module.o) \
+    $(ARC)(LAPS_ingest.o) \
+    $(ARC)(get_analysis_window.o) \
+    $(ARC)(grid_interpolation.o) \
+    $(ARC)(STMAS_LAPS_input.o) \
+    $(ARC)(STMAS_analysis.o) \
+    $(ARC)(STMAS_minimizer.o) \
+    $(ARC)(routines.o) \
+    $(ARC)(STMAS_costgrad.o) \
+    $(ARC)(STMAS_balcost.o) \
+    $(ARC)(STMAS_main.o)
+
+SRC=STMAS_module.o \
+    LAPS_ingest.o \
+    get_analysis_window.o \
+    grid_interpolation.o \
+    STMAS_LAPS_input.o \
+    STMAS_analysis.o \
+    STMAS_minimizer.o \
+    STMAS_costgrad.o \
+    routines.o \
+    STMAS_balcost.o \
+    STMAS_main.o
+    
+all: $(EXE)
+
+$(EXE): $(SRC) $(ARC) $(LAPSLIBS)
+	$(FC) $(FFLAGS) $(FREE) $(STINC) $(SRC) $(LAPSFC) $(LAPSLIBS) \
+	$(OTHERLIBS) -o $@
+
+$(ARC): $(OBJ)
+
+debug: $(SRC)
+       echo 'xie Hello: ',FFLAGS
+	$(RM) $(EXE) ;
+	$(MAKE) LAPSLIBS='$(DBLAPSLIBS)' \
+	CFLAGS='$(DBCFLAGS)' FFLAGS='$(DBFLAGS)'
+
+install: exe
+	$(INSTALL) $(EXE) $(INSTALLROOT)/bin/$(EXE)
+
+clean:
+	$(RM) $(EXE)  *.o *~ *# *.mod
+
+.SUFFIXES:
+.SUFFIXES: .o .c .f90 .a .f
+.f90.o:;    $(FC) $(FFLAGS) $(FREE) $(STINC) -c $*.f90
+.f.o:;      $(FC) $(FFLAGS) -c $*.f

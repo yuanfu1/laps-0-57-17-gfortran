@@ -1,0 +1,16 @@
+# Testing obs mapping build
+
+FC = pgf90
+FLAG=-g
+INC=-I../../lib/modules -I../observations -I..
+LIB=../libstmas4d.a ../observations/libdebugstmas4d_obs.a libstmas4d_map.a
+
+FILES=\
+      drv.f90
+
+drv: $(FILES)
+	$(FC) -o drv $(FLAG) $(INC) $(FILES) $(LIB)
+
+clean:
+	rm -f *.o drv
+

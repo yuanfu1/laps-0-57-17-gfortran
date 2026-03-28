@@ -1,0 +1,40 @@
+8/9/2011
+Since lat, long, topo, mapf, land, jt1, jt2, jt3, cor, and bkgd are all readin from obs in 
+the finest grid, there is no need to copyto or bi-linear interpretation during multi-grid.
+
+In the subroutine projection, there is no need to run bi-linear interpretation to the above
+variables, instead runing at STMAS_mgrid%incr to readin from STMAS_final.
+
+
+6/14/2011 HJ add
+Added a soft link to ln -s observations/laps_sfcingest.mod laps_sfcingest.mod for now until 
+Yuanfu move the code from observations up to the current level.
+
+
+4/28/2011 HJ add
+There were a few f90 files in this directory when we started again on this date. They are
+saved on ./src_orig
+
+New name convention: STMAS_costgrad.f90 (in 2d, STMASFC_costgrad.f90, drop the FC part for 3d).
+
+--end HJ add
+
+This directory contains codes for STMAS 4D analysis in a sigma height coordinate
+
+Prepared by Yuanfu Xie Dec. 2009 at Global Systems Division, ESRL/NOAA.
+
+This is a redesigned of stmas developed by Wei Li, Zhongjie He and Yuanfu Xie with
+options of full dynamic model constraints and MPI.
+
+Development team:
+Brad Beechler
+Jenny Hui
+Dong Li
+Yuanfu Xie
+
+For vertical coordinate, we choose sigma-height:
+
+sigma = (h-h_s)/(h_t - h_s)*h_t
+
+where h_s is the surface height, terrain following and h_t is the domain height.
+

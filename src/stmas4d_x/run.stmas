@@ -1,0 +1,2 @@
+#!/bin/bash
+./STMAS4D.exe 2>&1 >  run.list &
