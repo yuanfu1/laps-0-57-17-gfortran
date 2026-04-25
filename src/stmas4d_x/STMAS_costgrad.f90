@@ -26,7 +26,7 @@ SUBROUTINE costfunc(mg,func,num_controls,mgrid)
   IMPLICIT NONE
 
   INTEGER, INTENT(IN) :: num_controls,mg
-  REAL, INTENT(OUT) :: func
+  REAL, INTENT(INOUT) :: func
   TYPE(STMAS_bkgd) :: mgrid
 
   func = 0.0d0

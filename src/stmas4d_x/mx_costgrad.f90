@@ -13,7 +13,7 @@ SUBROUTINE mx_costgrad(func,num_controls,mgrid)
   IMPLICIT NONE
 
   INTEGER, INTENT(IN) :: num_controls
-  REAL,    INTENT(OUT) :: func
+  REAL,    INTENT(INOUT) :: func
   TYPE(STMAS_bkgd) :: mgrid
 
   ! Local variables:

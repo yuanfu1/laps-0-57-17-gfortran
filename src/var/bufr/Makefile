@@ -168,7 +168,10 @@ SRC	= \
 	wtstat.f
 
 # As this lib saves its Fortran files in a tar file, Yuanfu made this change:
-all:
+# Modified to support incremental compilation - only extract/build if needed
+all: $(LIB)
+
+$(LIB): BUFRLIB.tar
 	tar xvf BUFRLIB.tar
 	$(MAKE) $(addsuffix .o, $(basename $(SRC)))
 	ar rv $(LIB) $(addsuffix .o, $(basename $(SRC)))

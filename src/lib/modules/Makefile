@@ -43,19 +43,20 @@ RM=rm -f
 
 .SUFFIXES:              .f90 .F90 .o
 
+# Prevent make from deleting .o files after archiving
+.PRECIOUS: %.o
+
 LIB=libmodules.a
 DEBUGLIB=libdebugmodules.a
 ARCHIVE = ar rv
 
 .F90.o:
-			$(RM) $@
-			$(FC) -c $(FFLAGS) $(FREE) $(INC) $*.F90
-			$(ARCHIVE) $(LIB) $(<:.F90=.o)
+		$(FC) -c $(FFLAGS) $(FREE) $(INC) $*.F90
+		$(ARCHIVE) $(LIB) $(<:.F90=.o)
 
 .f90.o:
-			$(RM) $@
-			$(FC) -c $(FFLAGS) $(FREE) $(INC) $*.f90
-			$(ARCHIVE) $(LIB) $(<:.f90=.o)
+		$(FC) -c $(FFLAGS) $(FREE) $(INC) $*.f90
+		$(ARCHIVE) $(LIB) $(<:.f90=.o)
 
 
 FMOD = mem_allsky.o mem_namelist.o mem_grid.o mem_static.o mem_wind.o mem_sfcanl.o mem_temp.o mem_vol.o module_auto_mod.o \
@@ -77,12 +78,8 @@ module_grib2.o:	module_map_utils.o
 
 $(LIB):			$(FMOD)
 			$(RANLIB) $(LIB)
-			$(RM) *.o
 
 debug:	
-	($(RM) *.o *.mod ; $(MAKE) lib	\
- 	"LIB	=	$(DEBUGLIB)" 	\
-	"FFLAGS =	$(DBFLAGS)" 	)
 
 install: lib
 

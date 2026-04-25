@@ -48,6 +48,10 @@ BUFRLIB = $(SRCROOT)/src/var/bufr/libbufr.a
 
 .SUFFIXES:
 .SUFFIXES: .o .c .f90 .a .f
+
+# Prevent make from deleting .o files after building
+.PRECIOUS: %.o
+
 .f90.o:;    $(FC) $(FLAG) $(FREE) -c $*.f90
 .f.o:;      $(FC) $(FLAG) -c $*.f
 .c.o:;	    $(CC) $(CPPFLAGS) -c $*.c
@@ -81,6 +85,9 @@ STMAS= \
         output_anals.f90 \
         main.f90
 
+# Object files for STMAS
+STMAS_OBJ = $(STMAS:.f90=.o)
+
 STMAS_CG= \
         prmtrs_stmas.f90 \
         generaltools.f90 \
@@ -100,24 +107,24 @@ STMAS_CG= \
         output_anals.f90 \
         main.f90
 
+# Object files for STMAS_CG (handles mix of .f90 and .o files)
+STMAS_CG_OBJ = $(patsubst %.f90,%.o,$(STMAS_CG))
+
 all: $(ANA) 
 #$(ANA_CG): compilation problem for cg_descent.f on toro.
 #$(POST)
 
-$(ANA): $(STMAS) $(LAPSLIBS)
-	$(FC) $(FFLAGS) $(FREE) $(STMAS) $(LAPSFC) $(LAPSLIBS) \
+$(ANA): $(STMAS_OBJ) $(LAPSLIBS)
+	$(FC) $(FFLAGS) $(STMAS_OBJ) $(LAPSFC) $(LAPSLIBS) \
 	$(BUFRLIB) $(OTHERLIBS) -o $@
-	rm -f *.o
 
-$(ANA_CG): $(STMAS_CG) $(LAPSLIBS)
-	$(FC) $(FFLAGS) $(FREE) $(STMAS_CG) $(LAPSFC) $(LAPSLIBS) \
+$(ANA_CG): $(STMAS_CG_OBJ) $(LAPSLIBS)
+	$(FC) $(FFLAGS) $(STMAS_CG_OBJ) $(LAPSFC) $(LAPSLIBS) \
 	$(BUFRLIB) $(OTHERLIBS) -o $@
-	rm -f *.o
 
 $(POST): $(GSIPO) $(LAPSLIBS) $(HUMIDLIB)
 	$(FC) $(FFLAGS) $(FREE) $(GSIPO) $(LAPSFC) $(LAPSLIBS) \
 	$(BUFRLIB) $(OTHERLIBS) -o $@
-	rm -f *.o
 
 debug: $(STMAS) #$(STMAS_CG)
 	$(RM) $(ANA) $(ANA_CG);

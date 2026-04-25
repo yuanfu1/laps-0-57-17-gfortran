@@ -27,7 +27,16 @@ LAPSFC = $(SRCROOT)/src/sfc/libsfc.a
 
 
 .SUFFIXES:
-.SUFFIXES: .o .c .f .a
+.SUFFIXES: .o .c .f .f90 .a
+
+# Prevent make from deleting .o files after building
+.PRECIOUS: %.o
+
+.f90.o:
+	$(FC) -c $(FFLAGS) $(FREE) $*.f90
+
+.f.o:
+	$(FC) -c $(FFLAGS) $(FIXED) $*.f
 
 EXE = recurs_iter.x
 MOD = Definition.o \
@@ -40,20 +49,23 @@ INC =
 
 SRC=MAIN.f90 \
     Writeout.f90 \
-    routines.o \
-    lso_reader_meso.o \
-    get_laps_info.o 
+    routines.f \
+    lso_reader_meso.f \
+    get_laps_info.f
 #\
-#    laps_routines.o
+#    laps_routines.f
+
+# Object files for SRC
+SRC_OBJ = $(SRC:.f90=.o)
+SRC_OBJ := $(SRC_OBJ:.f=.o)
 
 all: exe
 
 exe: $(EXE)
 
-$(EXE): $(MOD) $(SRC) $(LAPSLIBS)
-	$(FC) $(FFLAGS) $(FREE) $(SRC) $(MOD) $(LAPSFC) $(LAPSLIBS) \
+$(EXE): $(MOD) $(SRC_OBJ) $(LAPSLIBS)
+	$(FC) $(FFLAGS) $(SRC_OBJ) $(MOD) $(LAPSFC) $(LAPSLIBS) \
 	$(OTHERLIBS) -o $@
-	rm -f *.o
 
 debug: $(SRC)
 	echo "Hello " $(RM)
@@ -122,7 +134,9 @@ routines.o: routines.f
 
 lso_reader_meso.o: lso_reader_meso.f
 	$(FC) -c $(FFLAGS) $(FIXED) lso_reader_meso.f
+
 QC_tools.o: QC_tools.f
 	$(FC) -c $(FFLAGS) $(FIXED) QC_tools.f
-get_laps_info: get_laps_info.f
+
+get_laps_info.o: get_laps_info.f
 	$(FC) -c $(FFLAGS) $(FIXED) get_laps_info.f

@@ -183,7 +183,11 @@ CONTAINS
     INTEGER :: i,istatus
 
     ! Read in configure namelist:
-    OPEN(unit=11,file='stmas_conf.nl')
+    OPEN(unit=11,file='stmas_conf.nl',IOSTAT=istatus)
+    IF (istatus .NE. 0) THEN
+      PRINT *, header,'ERROR: Cannot open stmas_conf.nl - file not found or unreadable'
+      STOP
+    ENDIF
     READ(11,NML=STMAS_configure,IOSTAT=istatus)
     WRITE(*,1) header,STMAS_start_grdpts,STMAS_numlevels, STMAS_time_window
     CLOSE(11)
@@ -191,7 +195,11 @@ CONTAINS
           'Seconds before analysis time: ',i8,' Seconds after: ',i8)
 
 ! Read in analysis variable namelist:
-    OPEN(unit=11,file='stmas_vars.nl')
+    OPEN(unit=11,file='stmas_vars.nl',IOSTAT=istatus)
+    IF (istatus .NE. 0) THEN
+      PRINT *, header,'ERROR: Cannot open stmas_vars.nl - file not found or unreadable'
+      STOP
+    ENDIF
     READ(11,NML=STMAS_variables,IOSTAT=istatus)
 !
 !

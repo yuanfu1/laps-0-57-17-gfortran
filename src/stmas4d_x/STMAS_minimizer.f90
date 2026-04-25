@@ -42,6 +42,14 @@ SUBROUTINE STMAS_minimizer(num_controls,mg,mgrid)
 
   !** End of LBFGS_B declarations.
 
+  ! Guard against 32-bit integer overflow: wkspc size = nc*(2*msave+4)+O(msave^2)
+  ! For large domains this can overflow INT32 and cause a silent bad ALLOCATE -> SIGSEGV.
+  IF (INT(num_controls,8)*(2*msave+4) > INT(HUGE(num_controls),8)) THEN
+    PRINT*,'FATAL: num_controls=',num_controls,' is too large for 32-bit LBFGSB workspace.'
+    PRINT*,'Reduce domain size (nx,ny,nz,nt) before running STMAS on this grid.'
+    STOP
+  ENDIF
+
   ! Allocate the space:
   ALLOCATE(new_sol(num_controls),controls(num_controls),grad(num_controls), &
            bdlow(num_controls),bdupp(num_controls),nbund(num_controls), &

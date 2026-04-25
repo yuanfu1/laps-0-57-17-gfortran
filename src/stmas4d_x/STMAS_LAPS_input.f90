@@ -108,25 +108,25 @@ Print*,'YUAN End: get_laps_bkgd',STMAS_final%bkgd(1,1,1,1,1:6)
   STMAS_final%nfinest = STMAS_final%numgrid
   STMAS_final%incr = 1
 
-  PRINT*
-  PRINT*,'---------------------------------------------------------'
-  PRINT*,'|                                                       |'
-  PRINT*,'|           STMAS: Reading observation data             |'
-  PRINT*,'|                                                       |'
-  PRINT*,'---------------------------------------------------------'
+  ! PRINT*
+  ! PRINT*,'---------------------------------------------------------'
+  ! PRINT*,'|                                                       |'
+  ! PRINT*,'|           STMAS: Reading observation data             |'
+  ! PRINT*,'|                                                       |'
+  ! PRINT*,'---------------------------------------------------------'
 
-  ! Pass the namelist variable values to observations:
-  observations%numvars = STMAS_numvars
+  ! ! Pass the namelist variable values to observations:
+  ! observations%numvars = STMAS_numvars
 
-  CALL get_LAPS_obs(STMAS_domain,STMAS_numvars,STMAS_varnames, &
-                    STMAS_invalid,STMAS_final%numgrid, &
-                    STMAS_final%lat,STMAS_final%lon, &
-                    STMAS_final%topo,STMAS_maxobs, &
-                    observations%numobs,observations%value, &
-                    observations%error,observations%xyzt, &
-                    observations%lat,observations%lon, &
-                    observations%stnames,observations%types, &
-                    STMAS_debugging,STMAS_success)
+  ! CALL get_LAPS_obs(STMAS_domain,STMAS_numvars,STMAS_varnames, &
+  !                   STMAS_invalid,STMAS_final%numgrid, &
+  !                   STMAS_final%lat,STMAS_final%lon, &
+  !                   STMAS_final%topo,STMAS_maxobs, &
+  !                   observations%numobs,observations%value, &
+  !                   observations%error,observations%xyzt, &
+  !                   observations%lat,observations%lon, &
+  !                   observations%stnames,observations%types, &
+  !                   STMAS_debugging,STMAS_success)
 
 !hj  CALL background_at_obs(STMAS_final,observations)
 

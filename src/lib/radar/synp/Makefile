@@ -43,22 +43,26 @@ RM=rm -f
 
 .SUFFIXES:              .f90 .F90 .o
 
+# Prevent make from deleting .o files after building
+.PRECIOUS: %.o
+
 LIB=libsynp.a
 DEBUGLIB=libdebugsynp.a
 ARCHIVE = ar rv
 
 .F90.o:
-			$(RM) $@
 			$(FC) -c $(FFLAGS) $(FREE) $(INC) $*.F90
-			$(ARCHIVE) $(LIB) $(<:.F90=.o)
 
 .f90.o:
-			$(RM) $@
 			$(FC) -c $(FFLAGS) $(FREE) $(INC) $*.f90
-			$(ARCHIVE) $(LIB) $(<:.f90=.o)
 
 
-FMOD = src_global.o src_hilfe.o src_hyd.o src_scatter.o src_tmatrix.o src_versuch.o 
+SRC = src_global.f90 src_hilfe.f90 src_hyd.f90 src_scatter.f90 src_tmatrix.f90 src_versuch.f90
+
+OBJS = $(SRC:.f90=.o)
+
+ARCHIVE_MEMBERS = $(LIB)(src_global.o) $(LIB)(src_hilfe.o) $(LIB)(src_hyd.o) \
+                  $(LIB)(src_scatter.o) $(LIB)(src_tmatrix.o) $(LIB)(src_versuch.o)
 
 all:			lib
 
@@ -70,9 +74,11 @@ lib:			$(LIB)
 
 #module_grib2.o:	module_map_utils.o
 
-$(LIB):			$(FMOD)
+$(LIB):			$(ARCHIVE_MEMBERS)
 			$(RANLIB) $(LIB)
-			$(RM) *.o
+
+$(LIB)(%.o): %.o
+			$(ARCHIVE) $(LIB) $<
 
 debug:	
 	($(RM) *.o *.mod ; $(MAKE) lib	\

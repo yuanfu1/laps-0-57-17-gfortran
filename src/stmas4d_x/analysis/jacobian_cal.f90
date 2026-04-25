@@ -63,6 +63,7 @@ use STMAS, ONLY: kappa,P00
    integer i,j,k,t,nx,ny,nz,nt
    real tv,pres(nx,ny,nz,nt),temp(nx,ny,nz,nt),rv(nx,ny,nz,nt)
 
+  PRINT*,'Debugging: in thv_cal: kappa/P00: ', kappa, P00
    do t=1,nt
      do k=1,nz
        do j=1,ny

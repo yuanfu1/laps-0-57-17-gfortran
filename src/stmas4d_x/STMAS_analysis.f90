@@ -94,8 +94,10 @@ SUBROUTINE STMAS_analysis
                                               1:STMAS_numvars),STMAS_final%numgrid, &
                                               STMAS_numvars)
 
-    print*,'final-tmgrid',STMAS_tmgrid%numgrid
-    print*,'final-num',STMAS_final%numgrid
+    print*,'final-tmgrid',STMAS_tmgrid%numgrid,' final-tgrid pressure: ', &
+      MINVAL(STMAS_tmgrid%anal(:,:,:,:,4)),MAXVAL(STMAS_tmgrid%anal(:,:,:,:,4))
+    print*,'final-num',STMAS_final%numgrid,' final pressure: ', &
+      MINVAL(STMAS_final%anal(:,:,:,:,4)),MAXVAL(STMAS_final%anal(:,:,:,:,4))
 
 ! Add the increment to the background as an initial guess:
     STMAS_final%anal = STMAS_final%anal+STMAS_final%bkgd

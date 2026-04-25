@@ -330,7 +330,7 @@ C
         GOTO 999
 C
 960     IF (FLAG .NE. 1)
-     1    write (6,*) 'Error writing data to file...write aborted.'
+     1    write (6,*) 'Error writing laps data to file...write aborted.'
         ISTATUS=ERROR(2)
         GOTO 999
 C
@@ -644,7 +644,7 @@ C
         GOTO 999
 C
 960     IF (FLAG .NE. 1)
-     1    write (6,*) 'Error writing data to file...write aborted.'
+     1    write (6,*) 'Error writing mult data to file...write aborted.'
         ISTATUS=ERROR(2)
         GOTO 999
 C

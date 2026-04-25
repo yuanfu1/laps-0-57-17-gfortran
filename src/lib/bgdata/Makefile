@@ -15,6 +15,9 @@ include $(SRCROOT)/src/include/makefile.inc
 .SUFFIXES:
 .SUFFIXES: .o .c .f .a
 
+# Prevent make from deleting .o files after archiving
+.PRECIOUS: %.o
+
 LIB      = libbgdata.a
 DEBUGLIB = libdebugbgdata.a
 
@@ -39,7 +42,8 @@ DBARCHIVE = $(DEBUGLIB)($(addsuffix .o, $(basename $(SRC))))
 
 
 all: lib
-	( cd wrf; $(MAKE); $(MAKE) cleanup )
+	cd wrf && $(MAKE)
+	cd grapes && $(MAKE)
 
 lib: $(LIB)
 
@@ -50,7 +54,8 @@ $(LIB): $(ARCHIVE)
 debug: $(SRC)
 	$(MAKE) lib LIB='$(DEBUGLIB)' ARCHIVE='$(DBARCHIVE)' \
 	CFLAGS='$(DBCFLAGS)' FFLAGS='$(DBFLAGS)'
-	( cd wrf; $(MAKE) debug; $(MAKE) cleanup )
+	cd wrf && $(MAKE) debug
+	cd grapes && $(MAKE) debug
 
 install: all
 

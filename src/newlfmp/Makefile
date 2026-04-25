@@ -67,10 +67,12 @@ RM=rm -f
 
 .SUFFIXES:              .f90 .o
 
+# Prevent make from deleting .o files after building
+.PRECIOUS: %.o
+
 %.o:%.mod
 
 .f90.o:
-			$(RM) $@
 			$(FC) -c $(FFLAGS) $(FREE) $(INC) $*.f90
 
 EXE=lfmpost.exe
@@ -84,17 +86,9 @@ FOBJS=$(FSRC:.f90=.o)
 
 COBJS=$(CSRC:.c=.o)
 
-
-FMOD = constants.o \
-       lfmgrid.o \
-       mm5util.o \
-       nmmutil.o \
-       st4util.o \
-       wrfutil.o 
-
 all:			$(EXE)
 
-$(EXE):			$(FOBJS) $(COBJS) $(FMOD)
+$(EXE):			$(FOBJS) $(COBJS) $(LAPSLIBS)
 			$(FC) $(FREE) -o $@ $(FFLAGS) $(FOBJS) $(COBJS) \
 			$(LAPSLIBS) $(HDF5LIB) $(OTHERLIBS) $(INC) -lm
 
@@ -129,8 +123,6 @@ metfunc.o:		constants.o
 ptfcst.o:		lfmgrid.o
 
 lfmwrite.o:		lfmgrid.o
-
-$(EXE):			$(SRCROOT)/src/lib/util/libutil.a $(SRCROOT)/src/lib/liblaps.a $(SRCROOT)/src/lib/modules/libmodules.a $(SRCROOT)/src/lib/radar/synp/libsynp.a                                          
 
 clean:
 			$(RM) *.o $(EXE) core

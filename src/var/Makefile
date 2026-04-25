@@ -42,6 +42,10 @@ HUMIDLIB = $(SRCROOT)/src/humid/liblq3.a
 
 .SUFFIXES:
 .SUFFIXES: .o .c .f90 .a .f
+
+# Prevent make from deleting .o files after building
+.PRECIOUS: %.o
+
 .f90.o:;    $(FC) $(FLAG) $(FREE) -c $*.f90
 .f.o:;      $(FC) $(FLAG) -c $*.f
 .c.o:;	    $(CC) $(CPPFLAGS) -c $*.c
@@ -68,29 +72,32 @@ GSIPR= GSI_Prep.f90 \
        StaggerConverter.f90 \
        Interpolation.f90
 
+# Object files for GSIPR
+GSIPR_OBJ = $(GSIPR:.f90=.o)
+
 GSIPO= GSI_Post.f90 \
-         $(WINDLIB) \
        StaggerXY.f90 \
        LAPSMassConverter.f90 \
        StaggerConverter.f90 \
-       Interpolation.f90 \
-         $(HUMIDLIB) 
+       Interpolation.f90
 
+# Object files for GSIPO
+GSIPO_OBJ = $(GSIPO:.f90=.o)
 
 GSICC= getiofile.c
 
+# Object files for GSICC
+GSICC_OBJ = $(GSICC:.c=.o)
+
 all: $(PREP) $(POST)
 
-$(PREP): $(GSIPR) $(GSICC) $(LAPSLIBS)
-	$(CC) $(CPPFLAGS) -c $(GSICC)
-	$(FC) $(FFLAGS) $(FREE) $(GSIPR) getiofile.o $(LAPSFC) $(LAPSLIBS) \
+$(PREP): $(GSIPR_OBJ) $(GSICC_OBJ) $(LAPSLIBS)
+	$(FC) $(FFLAGS) $(GSIPR_OBJ) $(GSICC_OBJ) $(LAPSFC) $(LAPSLIBS) \
 	$(BUFRLIB) $(OTHERLIBS) -o $@
-	rm -f *.o
 
-$(POST): $(GSIPO) $(LAPSLIBS) $(HUMIDLIB)
-	$(FC) $(FFLAGS) $(FREE) $(GSIPO) $(LAPSFC) $(LAPSLIBS) \
+$(POST): $(GSIPO_OBJ) $(LAPSLIBS) $(HUMIDLIB)
+	$(FC) $(FFLAGS) $(GSIPO_OBJ) $(LAPSFC) $(LAPSLIBS) $(HUMIDLIB) \
 	$(BUFRLIB) $(OTHERLIBS) -o $@
-	rm -f *.o
 
 debug: $(GSIPR) $(GSIPO)
 	$(RM) $(PREP) $(POST);

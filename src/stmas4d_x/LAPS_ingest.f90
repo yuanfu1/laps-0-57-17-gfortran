@@ -310,6 +310,7 @@ SUBROUTINE get_LAPS_bkgd(num_vars_in,var_names_in,ngrid_in,bkgnd_out,zz)
 
         STOP
       ENDIF
+      PRINT*,'LAPS background for variable ',var_names_in(iv),' is read in successfully!'
 
 ! print sample of bkgnd data. HJ 6/9/2011
       WRITE(*,'(A4,e13.5)') var_names_in(iv),bkgnd_out(2,2,15,t,iv)
@@ -319,6 +320,7 @@ SUBROUTINE get_LAPS_bkgd(num_vars_in,var_names_in,ngrid_in,bkgnd_out,zz)
 ! get zz.
   if(var_names_in(4) .eq. 'P3')then
     call get_ht_1d(ngrid_in(3),zz,istatus)
+    PRINT*,'XIE ZZ: ',MINVAL(zz), MAXVAL(zz)
     IF (istatus .NE. 1) THEN
       print*,'STMAS>LAPS_ingest>get_LAPS_bkgd: simga_ht is incorrect'
     endif

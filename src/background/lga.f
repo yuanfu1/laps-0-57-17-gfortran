@@ -55,6 +55,7 @@ c        bgmodel =10 ---> Unidata default netCDF format from gribtonc  !WNI
 c        bgmodel =11 ---> WRF-ARW raw netcdf files (single time per file) !WNI
 c        bgmodel =12 ---> ECMWF with two netcdf options: ESRL and FMI
 c        bgmodel =13 ---> GRIB1 and GRIB2-formatted: GFS, NAM, RUC, ECMWF, etc
+c        bgmodel =14 ---> GRAPES binary files ! Yuanfu Xie added on 2026-03-28
 c
 c------------------> GRID DIMENSION SPECIFICATION <-----------------------------
 c
@@ -148,16 +149,23 @@ c Read information from static/nest7grid.parms
 c
 c Read information from static/background.nl
 c
+      bgmodel = -99
       call get_background_info(bgpaths,bgmodels
      +,forecast_length,use_analysis,use_forecast,cmodels
      +,itime,smooth_fields,luse_sfc_bkgd,ntmin,ntmax,lgb_only)
 
       nbgmodels=0
       do i=1,maxbgmodels
-         if(index(bgpaths(i),' ').ne.0)then
+c       if(index(bgpaths(i),' ').ne.0)then
+c.      Yuanfu Xie changed this to check bgmodels instead of bgpaths 
+c.      because some bgmodels have blank paths but are still valid models to run
+         if(bgmodels(i) .ne. 0) then
             nbgmodels=nbgmodels+1
          endif
       enddo
+
+      PRINT*,'Background model information: ',bgmodels(1:3),
+     1       ' nbgmodels=',nbgmodels
 
 c
 c *** Initialize esat table.
@@ -222,8 +230,12 @@ c
        endif
        print*,'----------------------------------------------'
        print*
-
        i4time_now_lga=i4time_now+(itime_inc*laps_cycle_time)
+
+       ! Debugging:
+       PRINT*,'i4time_now before increment = ',i4time_now, 
+     1        i4time_now_lga, laps_cycle_time, itime_inc
+
        call make_fnam_lp(i4time_now_lga,a9,istatus)
        print*,'processing background data for ',a9
        print*
@@ -248,7 +260,7 @@ c
      1                                           bg_files,reject_cnt
 
 c        if(i.eq.nbgmodels)i=0
-         if(reject_cnt.gt.bg_files )then    !.and. bg_files.gt.0) then
+         if(reject_cnt.gt.bg_files)then    !.and. bg_files.gt.0) then
             i=i+1
             bgmodel = bgmodels(i)
             bgpath =  bgpaths(i)
@@ -275,7 +287,18 @@ c is still doing the job even though it is difficult software
 c to work with. get_acceptable_files is also used in dprep.f 
 c
 c        call get_bkgd_files(i4time_now_lga,bgpath,bgmodel
-         IF (bgmodel .NE. 11) THEN !WNI
+c        Yuanfu Xie added on 2026-03-28, this subroutine call to process GRAPES binary files
+         IF (bgmodel .EQ. 14) THEN
+           print*,'Calling get_bkgd_files for GRAPES binary files'
+           print*,'bgpath:   ',TRIM(bgpath)
+           print*,'bgmodel:  ',bgmodel
+           print*,'cmodel:   ',TRIM(cmodel)
+
+           call lga_driver_grapes(nx_laps,ny_laps,nz_laps,
+     +             bgpath,cmodel(1:12),use_analysis,forecast_length,
+     +             luse_sfc_bkgd,
+     +             i4time_now_lga,smooth_fields,lga_status)
+         ELSE IF (bgmodel .NE. 11) THEN !WNI
            print*,'Calling get_acceptable_files '
            print*,'bgpath:   ',TRIM(bgpath)
            print*,'cmodel:   ',TRIM(cmodel)

@@ -15,6 +15,9 @@ include $(SRCROOT)/src/include/makefile.inc
 .SUFFIXES:
 .SUFFIXES: .o .f90 .a
 
+# Prevent make from deleting .o files after archiving
+.PRECIOUS: %.o
+
 LIB      = ../libbgdata.a
 DEBUGLIB = ../libdebugbgdata.a
 
@@ -31,7 +34,6 @@ ARCHIVE = $(LIB)($(addsuffix .o, $(basename $(SRC))))
 DBARCHIVE = $(DEBUGLIB)($(addsuffix .o, $(basename $(SRC))))
 
 .f90.o:
-	$(RM) $@
 	$(FC) -c $(FFLAGS) $(FREE) $(INC) $*.f90
 
 all: lib

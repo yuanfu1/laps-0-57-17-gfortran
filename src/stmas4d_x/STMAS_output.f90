@@ -102,7 +102,9 @@ SUBROUTINE write_bal(numgrid,max_vars,numvar,varnam,analys,zz,i4time,lapsdt,kapp
 !            dat(i,j,k,6) = 0.001*SSH2(dat(i,j,k,4),dat(i,j,k,5),dat(i,j,k,5),-132.0)
 !          endif
 ! converting potential Temp back to Temp in Kelvin. HJ 11/2/2011
-          dat(i,j,k,5)=dat(i,j,k,5)*(dat(i,j,k,4)/p00)**kappa/(1.0+0.61*dat(i,j,k,6))
+! NOTE: STMAS4D reads T3 directly from LGA (actual temperature in K, NOT potential temperature),
+! so this conversion is NOT applied here. The analysis arrays already hold T in Kelvin.
+!         dat(i,j,k,5)=dat(i,j,k,5)*(dat(i,j,k,4)/p00)**kappa/(1.0+0.61*dat(i,j,k,6))
 ! converting w3 back to om in pa/s. Use the function w_to_omega for now. 
 ! Will replace it with omega=-w*g*rho. HJ 11/9/2011
 !          dat(i,j,k,3)=w_to_omega(dat(i,j,k,3),dat(i,j,k,4))
@@ -132,9 +134,11 @@ SUBROUTINE write_bal(numgrid,max_vars,numvar,varnam,analys,zz,i4time,lapsdt,kapp
 
 ! HJ: ../balance/writeballaps/
 ! write_bal_laps_ht(i4time,ht,u,v,temp,om,rh,sh,imax,jmax,kmax,pres,istatus) 9/30/2011
-!  CALL WRITE_BAL_LAPS_HT(i4t,dat(1,1,1,4),dat(1,1,1,1),dat(1,1,1,2),dat(1,1,1,5), &
-!                     dat(1,1,1,3),RH,dat(1,1,1,6), &
-!                     numgrid(1),numgrid(2),numgrid(3),zz,istatus)
+  PRINT*,'Write the balanced temperature: ',MINVAL(dat(:,:,:,5)),MAXVAL(dat(:,:,:,5)), ' at time ', i4t
+  PRINT*,'Write the balanced pressure: ',MINVAL(dat(:,:,:,4)),MAXVAL(dat(:,:,:,4)), ' at time ', i4t
+ CALL WRITE_BAL_LAPS_HT(i4t,dat(1,1,1,4),dat(1,1,1,1),dat(1,1,1,2),dat(1,1,1,5), &
+                    dat(1,1,1,3),RH,dat(1,1,1,6), &
+                    numgrid(1),numgrid(2),numgrid(3),zz,istatus)
 
   ENDDO
 

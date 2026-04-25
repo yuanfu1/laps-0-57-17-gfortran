@@ -1,0 +1,824 @@
+ istatus            1
+ Initializing elapsed timer at 12-APR-2026 05:42:51
+ Here: get_grid_dim_xy
+  Sort_fn: names sorted, non_numeric/total =          115         115
+
+ ======> Read_namelist_laps: lapsparms           0
+ ======>          File_name: /Users/xiey/developments/da/laps/lapsdataroot_h/static//nest7grid.parms
+
+ /Users/xiey/developments/da/laps/lapsdataroot_h/static/ get_laps_config - parameters read in OK
+ Background model information:           14           0           0  nbgmodels=           1
+  systime (from systime.dat) = 251532300
+ Systime: 251532300   2064524400
+  lga mode =            3
+
+ ----------------------------------------------
+ Start time-minus-one cycle time interpolation
+ ----------------------------------------------
+
+ i4time_now before increment =   2064524400  2064520800        3600          -1
+ processing background data for 251532200
+
+ Looping through models (lga-1):         -99           1           0           0
+ Looping through models (lga-2):         -99           1           0           0
+ Calling get_bkgd_files for GRAPES binary files
+ bgpath:   /Volumes/Mac2Backup/caseStudy/250603/input/model
+ bgmodel:            14
+ cmodel:   GRAPES
+  Sort_fn: names sorted, non_numeric/total =            4           4
+   Found GRAPES file: /Volumes/Mac2Backup/caseStudy/250603/input/model/grapesinput2025060218
+   Found file: grapesinput2025060218
+   Path length:           48          70
+   Found GRAPES file: /Volumes/Mac2Backup/caseStudy/250603/input/model/grapesinput2025060300
+   Found file: grapesinput2025060300
+   Path length:           48          70
+   Found Namelist file: /Volumes/Mac2Backup/caseStudy/250603/input/model/namelist.input.si2025060218
+   Found file: namelist.input.si2025060218
+   Path length:           48          76
+   Found Namelist file: /Volumes/Mac2Backup/caseStudy/250603/input/model/namelist.input.si2025060300
+   Found file: namelist.input.si2025060300
+   Path length:           48          76
+ GRAPES file: /Volumes/Mac2Backup/caseStudy/250603/input/model/grapesinput2025060218
+   Checking file: grapesinput 2025 060218
+ GRAPES file time string: 2025-06-02_18:00:00.0000 -> i4time:   2064506400  2064520800
+ GRAPES file: /Volumes/Mac2Backup/caseStudy/250603/input/model/grapesinput2025060300
+   Checking file: grapesinput 2025 060300
+ GRAPES file time string: 2025-06-03_00:00:00.0000 -> i4time:   2064528000  2064520800
+ Found            2  GRAPES files. Will read the first one: /Volumes/Mac2Backup/caseStudy/250603/input/model/grapesinput2025060300
+ GRAPES file: /Volumes/Mac2Backup/caseStudy/250603/input/model/grapesinput2025060300 i4time:   2064528000
+ reftime from GRAPES file: 2025-06-03_00:00:00
+ Reading GRAPES namelist file.../Volumes/Mac2Backup/caseStudy/250603/input/model/namelist.input.si2025060300
+Max zz:  29358.914 Min zz:     -2.715 Max ht:   5392.624 Min ht:     -2.715
+ GRAPES file: /Volumes/Mac2Backup/caseStudy/250603/input/model/grapesinput2025060218 i4time:   2064506400
+ reftime from GRAPES file: 2025-06-02_18:00:00
+ Reading GRAPES namelist file.../Volumes/Mac2Backup/caseStudy/250603/input/model/namelist.input.si2025060300
+Max zz:  29358.914 Min zz:     -2.715 Max ht:   5392.624 Min ht:     -2.715
+ Here: get_grid_dim_xy
+ LAPS dims: nxl,nyl,nzl =         1025         513          43
+
+ ======> Read_namelist_laps: lapsparms          43
+ ======>          File_name: /Users/xiey/developments/da/laps/lapsdataroot_h/static//nest7grid.parms
+
+     Reading in lat/lon/topo/land frac 
+
+  subroutine check_domain: checking latlon_to_rlapsgrid
+  Initializing latlon_to_rlapsgrid  -0.03002   0.03002  -0.85398  -0.82395
+  check_domain: max_diff (gridpoints) =    6.66262861E-03  at i/j        1006          91
+  check_domain: max_diff (approx m)   =    6.66262865    
+  Checking rlapsgrid_to_latlon
+  Initializing rlapsgrid_to_latlon  -0.03002   0.03002  -0.85398  -0.82395
+  check_domain: max_diff (degrees) =    6.02724067E-05  at i/j         841         261
+  check_domain: max_diff (approx m)   =    6.62996483    
+  measured grid spacing on earths surface at domain center is:   1000.47174    
+  calculated grid spacing on earths surface at domain center is:   1000.00006    
+  grid spacing on projection plane using "latlon_to_xy" is:   1000.00623    
+  calculated grid spacing on earths surface at single lambert latitude:   24.0000000       1000.00000    
+
+ GRAPES grid dimensions: nxw,nyw,nzw =          666         559          65
+ Extracting GRAPES model-level variables...           2
+ Extracting GRAPES surface fields...
+ Min/Max GRAPES 3D Pressure:   1325.49475       100650.570    
+ GRAPES model-level data at domain centre
+ K   PRESS     HEIGHT   TEMP   SH       U       V      OM
+ --- --------  -------  -----  -------  ------  ------ -----------
+  1   1363.5   28899.  229.0  0.00000   -10.5     3.1   0.00000000
+  2   1460.2   28433.  228.4  0.00000   -10.8     3.4   0.00000000
+  3   1565.6   27960.  227.5  0.00000   -11.1     3.6   0.00000000
+  4   1680.7   27481.  226.4  0.00000   -11.3     3.6   0.00000000
+  5   1806.5   26996.  225.3  0.00000   -11.4     3.5   0.00000000
+  6   1944.3   26504.  223.9  0.00000   -11.5     3.3   0.00000000
+  7   2095.4   26006.  222.5  0.00000   -11.5     2.8   0.00000000
+  8   2261.5   25501.  221.1  0.00000   -11.4     2.1   0.00000000
+  9   2444.2   24991.  219.8  0.00000   -11.1     1.4   0.00000000
+ 10   2645.4   24474.  218.4  0.00000   -10.8     0.8   0.00000000
+ 11   2867.1   23952.  217.1  0.00000   -10.4     0.4   0.00000000
+ 12   3111.6   23424.  215.7  0.00000    -9.8     0.4   0.00000000
+ 13   3382.0   22890.  213.7  0.00000    -9.1     0.8   0.00000000
+ 14   3681.6   22352.  211.5  0.00000    -8.4     1.4   0.00000000
+ 15   4014.8   21808.  208.9  0.00000    -7.8     2.1   0.00000000
+ 16   4386.2   21259.  206.1  0.00000    -7.3     2.6   0.00000000
+ 17   4801.4   20705.  203.1  0.00000    -7.1     2.8   0.00000000
+ 18   5266.7   20147.  200.0  0.00000    -7.2     2.3   0.00000000
+ 19   5789.5   19585.  196.7  0.00000    -7.5     1.3   0.00000000
+ 20   6378.4   19019.  193.2  0.00000    -7.4     0.2   0.00000000
+ 21   7043.6   18450.  189.6  0.00000    -6.3    -0.7   0.00000000
+ 22   7794.6   17877.  188.3  0.00000    -3.8    -0.9   0.00000000
+ 23   8636.1   17302.  188.8  0.00000    -0.6    -0.3   0.00000000
+ 24   9570.2   16725.  191.1  0.00000     2.6     0.8   0.00000000
+ 25  10597.9   16145.  194.2  0.00000     4.9     2.5   0.00000000
+ 26  11720.9   15564.  197.9  0.00000     6.2     4.4   0.00000000
+ 27  12942.1   14981.  202.1  0.00001     6.9     5.9   0.00000000
+ 28  14263.4   14398.  207.1  0.00001     7.5     6.4   0.00000000
+ 29  15685.9   13814.  212.2  0.00002     8.2     5.6   0.00000000
+ 30  17211.5   13231.  217.3  0.00004     9.0     3.9   0.00000000
+ 31  18844.0   12648.  222.2  0.00006     9.6     2.2   0.00000000
+ 32  20587.3   12067.  227.1  0.00015     9.7     1.6   0.00000000
+ 33  22444.5   11488.  231.9  0.00026     9.3     2.0   0.00000000
+ 34  24418.0   10910.  236.8  0.00041     8.6     2.5   0.00000000
+ 35  26509.8   10336.  241.4  0.00068     8.0     2.2   0.00000000
+ 36  28722.5    9765.  245.8  0.00094     7.8     1.2   0.00000000
+ 37  31059.3    9199.  249.8  0.00148     8.0    -0.3   0.00000000
+ 38  33523.7    8637.  253.3  0.00203     8.7    -1.7   0.00000000
+ 39  36119.4    8080.  256.4  0.00256     9.8    -2.8   0.00000000
+ 40  38850.0    7530.  259.1  0.00310    10.8    -3.2   0.00000000
+ 41  41718.2    6986.  261.7  0.00382    11.8    -2.6   0.00000000
+ 42  44722.4    6450.  264.7  0.00453    12.6    -1.5   0.00000000
+ 43  47856.4    5922.  267.8  0.00522    13.0    -0.5   0.00000000
+ 44  50977.7    5445.  270.9  0.00614    13.1    -0.3   0.00000000
+ 45  53920.8    5019.  273.2  0.00700    12.8    -0.8   0.00000000
+ 46  56785.7    4605.  274.8  0.00783    12.3    -1.5   0.00000000
+ 47  59692.9    4204.  276.1  0.00865    11.5    -1.9   0.00000000
+ 48  62632.1    3815.  277.6  0.00947    10.5    -1.8   0.00000000
+ 49  65587.3    3441.  279.6  0.01025     9.3    -1.5   0.00000000
+ 50  68539.9    3082.  281.9  0.01098     8.0    -1.5   0.00000000
+ 51  71470.6    2739.  284.1  0.01054     6.6    -1.9   0.00000000
+ 52  74363.6    2413.  285.0  0.01013     5.1    -2.8   0.00000000
+ 53  77205.5    2104.  285.0  0.00974     3.8    -3.8   0.00000000
+ 54  79980.6    1814.  284.2  0.00937     2.7    -4.8   0.00000000
+ 55  82670.0    1544.  282.8  0.00903     1.7    -5.5   0.00000000
+ 56  85252.5    1295.  281.4  0.00933     1.0    -5.9   0.00000000
+ 57  87700.1    1067.  282.1  0.00999     0.6    -6.1   0.00000000
+ 58  89975.9     862.  284.9  0.01058     0.3    -5.9   0.00000000
+ 59  92045.4     681.  288.7  0.01109     0.2    -5.5   0.00000000
+ 60  93879.9     525.  291.2  0.01152     0.2    -5.0   0.00000000
+ 61  95459.4     395.  292.0  0.01188     0.2    -4.4   0.00000000
+ 62  96764.5     291.  291.8  0.01217     0.3    -3.9   0.00000000
+ 63  97773.8     216.  291.1  0.01238     0.4    -3.5   0.00000000
+ 64  98465.5     170.  290.6  0.01251     0.4    -3.2   0.00000000
+ 65  99077.2     110.  289.3  0.01267     0.5    -2.9   0.00000000
+Min t3_grapess:    184.993 Max t3_grapess:    303.941 Min v3_grapess:    -31.193 Max v3_grapess:     26.184
+ Allocating arrays for GRAPES on pressure levels
+ Calling vinterp_grapes2p
+ GRAPES Press data from center of GRAPES domain
+ KP  PRESS     HEIGHT   TEMP   SH       U       V      OM
+ --- --------  -------  -----  -------  ------  ------ -----------
+  1 110000.0  -16414.  462.5  0.00000   -10.5     3.1   0.00000000
+  2 107500.0  -16103.  461.3  0.00000   -10.5     3.1   0.00000000
+  3 105000.0  -15786.  460.2  0.00000   -10.5     3.1   0.00000000
+  4 102500.0  -15462.  459.0  0.00000   -10.5     3.1   0.00000000
+  5 100000.0  -15130.  457.7  0.00000   -10.5     3.1   0.00000000
+  6  97500.0  -14792.  456.5  0.00000   -10.5     3.1   0.00000000
+  7  95000.0  -14445.  455.2  0.00000   -10.5     3.1   0.00000000
+  8  92500.0  -14091.  453.8  0.00000   -10.5     3.1   0.00000000
+  9  90000.0  -13727.  452.5  0.00000   -10.5     3.1   0.00000000
+ 10  87500.0  -13355.  451.0  0.00000   -10.5     3.1   0.00000000
+ 11  85000.0  -12973.  449.6  0.00000   -10.5     3.1   0.00000000
+ 12  82500.0  -12581.  448.1  0.00000   -10.5     3.1   0.00000000
+ 13  80000.0  -12178.  446.6  0.00000   -10.5     3.1   0.00000000
+ 14  77500.0  -11764.  445.0  0.00000   -10.5     3.1   0.00000000
+ 15  75000.0  -11338.  443.3  0.00000   -10.5     3.1   0.00000000
+ 16  72500.0  -10899.  441.6  0.00000   -10.5     3.1   0.00000000
+ 17  70000.0  -10447.  439.9  0.00000   -10.5     3.1   0.00000000
+ 18  67500.0   -9979.  438.1  0.00000   -10.5     3.1   0.00000000
+ 19  65000.0   -9497.  436.2  0.00000   -10.5     3.1   0.00000000
+ 20  62500.0   -8997.  434.2  0.00000   -10.5     3.1   0.00000000
+ 21  60000.0   -8480.  432.2  0.00000   -10.5     3.1   0.00000000
+ 22  57500.0   -7943.  430.1  0.00000   -10.5     3.1   0.00000000
+ 23  55000.0   -7385.  427.8  0.00000   -10.5     3.1   0.00000000
+ 24  52500.0   -6804.  425.5  0.00000   -10.5     3.1   0.00000000
+ 25  50000.0   -6199.  423.1  0.00000   -10.5     3.1   0.00000000
+ 26  47500.0   -5566.  420.5  0.00000   -10.5     3.1   0.00000000
+ 27  45000.0   -4902.  417.8  0.00000   -10.5     3.1   0.00000000
+ 28  42500.0   -4206.  414.9  0.00000   -10.5     3.1   0.00000000
+ 29  40000.0   -3473.  411.9  0.00000   -10.5     3.1   0.00000000
+ 30  37500.0   -2698.  408.7  0.00000   -10.5     3.1   0.00000000
+ 31  35000.0   -1876.  405.2  0.00000   -10.5     3.1   0.00000000
+ 32  32500.0   -1002.  401.5  0.00000   -10.5     3.1   0.00000000
+ 33  30000.0     -66.  397.5  0.00000   -10.5     3.1   0.00000000
+ 34  27500.0     941.  393.2  0.00000   -10.5     3.1   0.00000000
+ 35  25000.0    2030.  388.4  0.00000   -10.5     3.1   0.00000000
+ 36  22500.0    3220.  383.1  0.00000   -10.5     3.1   0.00000000
+ 37  20000.0    4530.  377.3  0.00000   -10.5     3.1   0.00000000
+ 38  17500.0    5991.  370.6  0.00000   -10.5     3.1   0.00000000
+ 39  15000.0    7645.  362.9  0.00000   -10.5     3.1   0.00000000
+ 40  12500.0    9556.  353.8  0.00000   -10.5     3.1   0.00000000
+ 41  10000.0   11830.  342.6  0.00000   -10.5     3.1   0.00000000
+ 42   7500.0   14653.  328.2  0.00000   -10.5     3.1   0.00000000
+ 43   5000.0   18426.  307.9  0.00000   -10.5     3.1   0.00000000
+Min u3_grapesp:    -34.215 Max u3_grapesp:      2.134 Min v3_grapesp:     -4.850 Max v3_grapesp:      7.644
+ Deallocating GRAPES model-level vars
+ Allocating LGA variables
+ Allocating LGB variables
+ Calling hinterp_grapes2lga
+ hinterp_grapes2lga: LGA Press data from center of LAPS domain
+ KP  PRESS     HEIGHT   TEMP   SH       U       V      OM
+ --- --------  -------  -----  -------  ------  ------ -----------
+  1 110000.0  -16458.  462.7  0.00000   -15.0     4.0   0.00000000
+  2 107500.0  -16147.  461.5  0.00000   -15.0     4.0   0.00000000
+  3 105000.0  -15830.  460.4  0.00000   -15.0     4.0   0.00000000
+  4 102500.0  -15506.  459.2  0.00000   -15.0     4.0   0.00000000
+  5 100000.0  -15174.  457.9  0.00000   -15.0     4.0   0.00000000
+  6  97500.0  -14835.  456.7  0.00000   -15.0     4.0   0.00000000
+  7  95000.0  -14489.  455.4  0.00000   -15.0     4.0   0.00000000
+  8  92500.0  -14134.  454.0  0.00000   -15.0     4.0   0.00000000
+  9  90000.0  -13771.  452.7  0.00000   -15.0     4.0   0.00000000
+ 10  87500.0  -13398.  451.3  0.00000   -15.0     4.0   0.00000000
+ 11  85000.0  -13016.  449.8  0.00000   -15.0     4.0   0.00000000
+ 12  82500.0  -12624.  448.3  0.00000   -15.0     4.0   0.00000000
+ 13  80000.0  -12221.  446.8  0.00000   -15.0     4.0   0.00000000
+ 14  77500.0  -11806.  445.2  0.00000   -15.0     4.0   0.00000000
+ 15  75000.0  -11380.  443.5  0.00000   -15.0     4.0   0.00000000
+ 16  72500.0  -10941.  441.8  0.00000   -15.0     4.0   0.00000000
+ 17  70000.0  -10488.  440.1  0.00000   -15.0     4.0   0.00000000
+ 18  67500.0  -10021.  438.3  0.00000   -15.0     4.0   0.00000000
+ 19  65000.0   -9538.  436.4  0.00000   -15.0     4.0   0.00000000
+ 20  62500.0   -9038.  434.4  0.00000   -15.0     4.0   0.00000000
+ 21  60000.0   -8521.  432.4  0.00000   -15.0     4.0   0.00000000
+ 22  57500.0   -7983.  430.3  0.00000   -15.0     4.0   0.00000000
+ 23  55000.0   -7425.  428.0  0.00000   -15.0     4.0   0.00000000
+ 24  52500.0   -6844.  425.7  0.00000   -15.0     4.0   0.00000000
+ 25  50000.0   -6238.  423.3  0.00000   -15.0     4.0   0.00000000
+ 26  47500.0   -5605.  420.7  0.00000   -15.0     4.0   0.00000000
+ 27  45000.0   -4941.  418.0  0.00000   -15.0     4.0   0.00000000
+ 28  42500.0   -4245.  415.1  0.00000   -15.0     4.0   0.00000000
+ 29  40000.0   -3511.  412.1  0.00000   -15.0     4.0   0.00000000
+ 30  37500.0   -2736.  408.9  0.00000   -15.0     4.0   0.00000000
+ 31  35000.0   -1914.  405.4  0.00000   -15.0     4.0   0.00000000
+ 32  32500.0   -1039.  401.7  0.00000   -15.0     4.0   0.00000000
+ 33  30000.0    -103.  397.7  0.00000   -15.0     4.0   0.00000000
+ 34  27500.0     904.  393.4  0.00000   -15.0     4.0   0.00000000
+ 35  25000.0    1995.  388.6  0.00000   -15.0     4.0   0.00000000
+ 36  22500.0    3185.  383.3  0.00000   -15.0     4.0   0.00000000
+ 37  20000.0    4496.  377.5  0.00000   -15.0     4.0   0.00000000
+ 38  17500.0    5957.  370.8  0.00000   -15.0     4.0   0.00000000
+ 39  15000.0    7612.  363.1  0.00000   -15.0     4.0   0.00000000
+ 40  12500.0    9525.  354.0  0.00000   -15.0     4.0   0.00000000
+ 41  10000.0   11800.  342.8  0.00000   -15.0     4.0   0.00000000
+ 42   7500.0   14625.  328.4  0.00000   -15.0     4.0   0.00000000
+ 43   5000.0   18401.  308.1  0.00000   -15.0     4.0   0.00000000
+ Adjusting WRF surface to LAPS surface
+ Deallocating GRAPES pressure-level vars
+ Deallocating GRAPES surface vars
+ Deallocating LAPS static vars
+ Creating derived pressure arrays
+ slp/psf/p/tsf/tsk/dsf/rsf/usf/vsf:   29735.2324       8115.34668       29735.2324       274.755615       326.302094       191.820801       0.00000000      -14.9693699       4.02510786    
+XIE Min u3:    -22.103 Max u3:     -9.701 Min v3:      0.986 Max v3:      6.210
+ Writing LGA at time:   2064520800  2064520800  File times:   2064506400  2064528000
+  LGA file = /Users/xiey/developments/da/laps/lapsdataroot_h/lapsprd/lga//2515322000000.lga
+ HT
+ Here: get_grid_dim_xy
+ write_laps ABORTED!
+  LAPS will currently only work on a PRESSURE vertical grid
+  Make sure VERTICAL_GRID is set to PRESSURE in nest7grid.parms
+ Error writing interpolated data to LAPS database.
+ grapes2lga_griddata: Error writing LGA
+
+ Looping through models (lga-1):           0           1           0           1
+ Looping through models (lga-2):           0           2           0           0
+ Calling get_acceptable_files 
+ bgpath:   
+ cmodel:   
+ bgmodel:             0
+ lgb_only:  F
+
+ ----------------------------------------------
+ get_acceptable_files: use_analysis / use_forecast =  F T
+ ----------------------------------------------
+Warning from scandir - No files returned
+  get_file_times - # files =            0
+ Total (nvaltimes) =            1
+ Variable bg_files = 0, return to main
+
+ No Acceptable files found for background model:
+ bgpath =  
+ bgmodel =            0
+
+
+ ----------------------------------------------
+ Start cycle time interpolation
+ ----------------------------------------------
+
+ i4time_now before increment =   2064524400  2064524400        3600           0
+ processing background data for 251532300
+
+ Looping through models (lga-1):         -99           1           0           0
+ Looping through models (lga-2):         -99           1           0           0
+ Calling get_bkgd_files for GRAPES binary files
+ bgpath:   /Volumes/Mac2Backup/caseStudy/250603/input/model
+ bgmodel:            14
+ cmodel:   GRAPES
+  Sort_fn: names sorted, non_numeric/total =            4           4
+   Found GRAPES file: /Volumes/Mac2Backup/caseStudy/250603/input/model/grapesinput2025060218
+   Found file: grapesinput2025060218
+   Path length:           48          70
+   Found GRAPES file: /Volumes/Mac2Backup/caseStudy/250603/input/model/grapesinput2025060300
+   Found file: grapesinput2025060300
+   Path length:           48          70
+   Found Namelist file: /Volumes/Mac2Backup/caseStudy/250603/input/model/namelist.input.si2025060218
+   Found file: namelist.input.si2025060218
+   Path length:           48          76
+   Found Namelist file: /Volumes/Mac2Backup/caseStudy/250603/input/model/namelist.input.si2025060300
+   Found file: namelist.input.si2025060300
+   Path length:           48          76
+ GRAPES file: /Volumes/Mac2Backup/caseStudy/250603/input/model/grapesinput2025060218
+   Checking file: grapesinput 2025 060218
+ GRAPES file time string: 2025-06-02_18:00:00.0000 -> i4time:   2064506400  2064524400
+ GRAPES file: /Volumes/Mac2Backup/caseStudy/250603/input/model/grapesinput2025060300
+   Checking file: grapesinput 2025 060300
+ GRAPES file time string: 2025-06-03_00:00:00.0000 -> i4time:   2064528000  2064524400
+ Found            2  GRAPES files. Will read the first one: /Volumes/Mac2Backup/caseStudy/250603/input/model/grapesinput2025060300
+ GRAPES file: /Volumes/Mac2Backup/caseStudy/250603/input/model/grapesinput2025060300 i4time:   2064528000
+ reftime from GRAPES file: 2025-06-03_00:00:00
+ Reading GRAPES namelist file.../Volumes/Mac2Backup/caseStudy/250603/input/model/namelist.input.si2025060300
+Max zz:  29358.914 Min zz:     -2.715 Max ht:   5392.624 Min ht:     -2.715
+ GRAPES file: /Volumes/Mac2Backup/caseStudy/250603/input/model/grapesinput2025060218 i4time:   2064506400
+ reftime from GRAPES file: 2025-06-02_18:00:00
+ Reading GRAPES namelist file.../Volumes/Mac2Backup/caseStudy/250603/input/model/namelist.input.si2025060300
+Max zz:  29358.914 Min zz:     -2.715 Max ht:   5392.624 Min ht:     -2.715
+ Here: get_grid_dim_xy
+ LAPS dims: nxl,nyl,nzl =         1025         513          43
+
+ ======> Read_namelist_laps: lapsparms          43
+ ======>          File_name: /Users/xiey/developments/da/laps/lapsdataroot_h/static//nest7grid.parms
+
+     Reading in lat/lon/topo/land frac 
+
+  subroutine check_domain: checking latlon_to_rlapsgrid
+  check_domain: max_diff (gridpoints) =    6.66262861E-03  at i/j        1006          91
+  check_domain: max_diff (approx m)   =    6.66262865    
+  Checking rlapsgrid_to_latlon
+  check_domain: max_diff (degrees) =    6.02724067E-05  at i/j         841         261
+  check_domain: max_diff (approx m)   =    6.62996483    
+  measured grid spacing on earths surface at domain center is:   1000.47174    
+  calculated grid spacing on earths surface at domain center is:   1000.00006    
+  grid spacing on projection plane using "latlon_to_xy" is:   1000.00623    
+  calculated grid spacing on earths surface at single lambert latitude:   24.0000000       1000.00000    
+
+ GRAPES grid dimensions: nxw,nyw,nzw =          666         559          65
+ Extracting GRAPES model-level variables...           2
+ Extracting GRAPES surface fields...
+ Min/Max GRAPES 3D Pressure:   1324.62341       100666.430    
+ GRAPES model-level data at domain centre
+ K   PRESS     HEIGHT   TEMP   SH       U       V      OM
+ --- --------  -------  -----  -------  ------  ------ -----------
+  1   1362.6   28899.  229.7  0.00000   -10.1     2.7   0.00000000
+  2   1459.0   28433.  228.9  0.00000   -10.6     2.9   0.00000000
+  3   1564.1   27960.  227.9  0.00000   -11.0     3.1   0.00000000
+  4   1678.8   27481.  226.7  0.00000   -11.3     3.1   0.00000000
+  5   1804.3   26996.  225.3  0.00000   -11.6     3.0   0.00000000
+  6   1941.9   26504.  223.8  0.00000   -11.7     2.8   0.00000000
+  7   2092.9   26006.  222.2  0.00000   -11.8     2.3   0.00000000
+  8   2259.0   25501.  220.8  0.00000   -11.7     1.7   0.00000000
+  9   2441.8   24991.  219.4  0.00000   -11.5     1.1   0.00000000
+ 10   2643.1   24474.  218.1  0.00000   -11.1     0.6   0.00000000
+ 11   2864.8   23952.  217.0  0.00000   -10.7     0.3   0.00000000
+ 12   3109.3   23424.  215.7  0.00000   -10.1     0.4   0.00000000
+ 13   3379.5   22890.  213.8  0.00000    -9.4     0.9   0.00000000
+ 14   3678.8   22352.  211.6  0.00000    -8.7     1.6   0.00000000
+ 15   4011.6   21808.  209.0  0.00000    -8.0     2.4   0.00000000
+ 16   4382.6   21259.  206.1  0.00000    -7.5     3.0   0.00000000
+ 17   4797.5   20705.  203.1  0.00000    -7.2     3.1   0.00000000
+ 18   5262.5   20147.  199.8  0.00000    -7.2     2.5   0.00000000
+ 19   5785.3   19585.  196.4  0.00000    -7.4     1.3   0.00000000
+ 20   6374.7   19019.  192.8  0.00000    -7.2     0.0   0.00000000
+ 21   7040.7   18450.  189.2  0.00000    -6.1    -0.8   0.00000000
+ 22   7793.1   17877.  187.9  0.00000    -3.7    -0.8   0.00000000
+ 23   8636.2   17302.  188.5  0.00000    -0.6     0.0   0.00000000
+ 24   9571.8   16725.  191.0  0.00000     2.5     1.4   0.00000000
+ 25  10600.0   16145.  194.4  0.00000     4.7     3.2   0.00000000
+ 26  11722.6   15564.  198.1  0.00000     6.1     4.9   0.00000000
+ 27  12942.7   14981.  202.4  0.00001     7.0     6.0   0.00000000
+ 28  14262.8   14398.  207.2  0.00001     7.6     6.2   0.00000000
+ 29  15684.3   13814.  212.3  0.00002     8.5     5.0   0.00000000
+ 30  17209.6   13231.  217.2  0.00004     9.5     3.1   0.00000000
+ 31  18842.2   12648.  222.2  0.00006    10.1     1.4   0.00000000
+ 32  20585.6   12067.  227.1  0.00015    10.1     0.9   0.00000000
+ 33  22442.7   11488.  231.9  0.00027     9.5     1.7   0.00000000
+ 34  24416.0   10910.  236.8  0.00041     8.6     2.6   0.00000000
+ 35  26507.7   10336.  241.4  0.00068     8.0     2.4   0.00000000
+ 36  28720.3    9765.  245.8  0.00094     7.7     1.3   0.00000000
+ 37  31056.6    9199.  249.9  0.00147     8.1    -0.3   0.00000000
+ 38  33519.8    8637.  253.4  0.00200     9.1    -1.9   0.00000000
+ 39  36114.1    8080.  256.6  0.00251    10.2    -3.1   0.00000000
+ 40  38843.2    7530.  259.2  0.00304    11.4    -3.4   0.00000000
+ 41  41710.0    6986.  261.8  0.00381    12.2    -2.7   0.00000000
+ 42  44713.0    6450.  264.7  0.00455    12.7    -1.4   0.00000000
+ 43  47846.1    5922.  267.8  0.00528    12.9    -0.2   0.00000000
+ 44  50966.6    5445.  270.9  0.00619    12.8     0.1   0.00000000
+ 45  53909.0    5019.  273.2  0.00705    12.6    -0.5   0.00000000
+ 46  56773.3    4605.  274.8  0.00787    12.1    -1.2   0.00000000
+ 47  59679.8    4204.  276.0  0.00871    11.3    -1.7   0.00000000
+ 48  62618.3    3815.  277.6  0.00960    10.4    -1.6   0.00000000
+ 49  65572.9    3441.  279.5  0.01045     9.2    -1.4   0.00000000
+ 50  68524.8    3082.  281.8  0.01124     7.9    -1.3   0.00000000
+ 51  71454.8    2739.  284.0  0.01071     6.7    -1.7   0.00000000
+ 52  74346.9    2413.  285.1  0.01021     5.4    -2.5   0.00000000
+ 53  77187.8    2104.  285.1  0.00974     4.3    -3.5   0.00000000
+ 54  79961.8    1814.  284.3  0.00930     3.3    -4.5   0.00000000
+ 55  82650.0    1544.  282.9  0.00888     2.4    -5.3   0.00000000
+ 56  85231.2    1295.  281.4  0.00918     1.7    -5.8   0.00000000
+ 57  87677.7    1067.  282.2  0.00988     1.1    -6.1   0.00000000
+ 58  89952.4     862.  285.0  0.01051     0.7    -6.0   0.00000000
+ 59  92020.9     681.  288.8  0.01106     0.5    -5.7   0.00000000
+ 60  93854.3     525.  291.4  0.01154     0.4    -5.1   0.00000000
+ 61  95432.7     395.  292.1  0.01194     0.5    -4.5   0.00000000
+ 62  96737.0     291.  291.9  0.01226     0.5    -4.0   0.00000000
+ 63  97745.7     216.  291.2  0.01249     0.6    -3.5   0.00000000
+ 64  98437.1     170.  290.6  0.01263     0.7    -3.2   0.00000000
+ 65  99048.5     110.  289.3  0.01282     0.7    -2.9   0.00000000
+Min t3_grapess:    184.843 Max t3_grapess:    304.399 Min v3_grapess:    -32.120 Max v3_grapess:     27.347
+ Allocating arrays for GRAPES on pressure levels
+ Calling vinterp_grapes2p
+ GRAPES Press data from center of GRAPES domain
+ KP  PRESS     HEIGHT   TEMP   SH       U       V      OM
+ --- --------  -------  -----  -------  ------  ------ -----------
+  1 110000.0  -16424.  462.5  0.00000   -10.1     2.7   0.00000000
+  2 107500.0  -16114.  461.4  0.00000   -10.1     2.7   0.00000000
+  3 105000.0  -15796.  460.2  0.00000   -10.1     2.7   0.00000000
+  4 102500.0  -15472.  459.0  0.00000   -10.1     2.7   0.00000000
+  5 100000.0  -15141.  457.8  0.00000   -10.1     2.7   0.00000000
+  6  97500.0  -14802.  456.5  0.00000   -10.1     2.7   0.00000000
+  7  95000.0  -14456.  455.2  0.00000   -10.1     2.7   0.00000000
+  8  92500.0  -14101.  453.9  0.00000   -10.1     2.7   0.00000000
+  9  90000.0  -13738.  452.5  0.00000   -10.1     2.7   0.00000000
+ 10  87500.0  -13366.  451.1  0.00000   -10.1     2.7   0.00000000
+ 11  85000.0  -12984.  449.6  0.00000   -10.1     2.7   0.00000000
+ 12  82500.0  -12591.  448.2  0.00000   -10.1     2.7   0.00000000
+ 13  80000.0  -12189.  446.6  0.00000   -10.1     2.7   0.00000000
+ 14  77500.0  -11774.  445.0  0.00000   -10.1     2.7   0.00000000
+ 15  75000.0  -11348.  443.4  0.00000   -10.1     2.7   0.00000000
+ 16  72500.0  -10909.  441.7  0.00000   -10.1     2.7   0.00000000
+ 17  70000.0  -10457.  439.9  0.00000   -10.1     2.7   0.00000000
+ 18  67500.0   -9990.  438.1  0.00000   -10.1     2.7   0.00000000
+ 19  65000.0   -9507.  436.2  0.00000   -10.1     2.7   0.00000000
+ 20  62500.0   -9007.  434.3  0.00000   -10.1     2.7   0.00000000
+ 21  60000.0   -8490.  432.2  0.00000   -10.1     2.7   0.00000000
+ 22  57500.0   -7953.  430.1  0.00000   -10.1     2.7   0.00000000
+ 23  55000.0   -7395.  427.9  0.00000   -10.1     2.7   0.00000000
+ 24  52500.0   -6814.  425.6  0.00000   -10.1     2.7   0.00000000
+ 25  50000.0   -6208.  423.1  0.00000   -10.1     2.7   0.00000000
+ 26  47500.0   -5575.  420.5  0.00000   -10.1     2.7   0.00000000
+ 27  45000.0   -4912.  417.8  0.00000   -10.1     2.7   0.00000000
+ 28  42500.0   -4216.  415.0  0.00000   -10.1     2.7   0.00000000
+ 29  40000.0   -3482.  412.0  0.00000   -10.1     2.7   0.00000000
+ 30  37500.0   -2707.  408.7  0.00000   -10.1     2.7   0.00000000
+ 31  35000.0   -1886.  405.3  0.00000   -10.1     2.7   0.00000000
+ 32  32500.0   -1011.  401.6  0.00000   -10.1     2.7   0.00000000
+ 33  30000.0     -75.  397.6  0.00000   -10.1     2.7   0.00000000
+ 34  27500.0     932.  393.2  0.00000   -10.1     2.7   0.00000000
+ 35  25000.0    2022.  388.5  0.00000   -10.1     2.7   0.00000000
+ 36  22500.0    3211.  383.2  0.00000   -10.1     2.7   0.00000000
+ 37  20000.0    4521.  377.3  0.00000   -10.1     2.7   0.00000000
+ 38  17500.0    5983.  370.6  0.00000   -10.1     2.7   0.00000000
+ 39  15000.0    7637.  362.9  0.00000   -10.1     2.7   0.00000000
+ 40  12500.0    9549.  353.8  0.00000   -10.1     2.7   0.00000000
+ 41  10000.0   11822.  342.6  0.00000   -10.1     2.7   0.00000000
+ 42   7500.0   14646.  328.3  0.00000   -10.1     2.7   0.00000000
+ 43   5000.0   18420.  308.0  0.00000   -10.1     2.7   0.00000000
+Min u3_grapesp:    -34.028 Max u3_grapesp:      2.235 Min v3_grapesp:     -5.770 Max v3_grapesp:      7.824
+ Deallocating GRAPES model-level vars
+ Allocating LGA variables
+ Allocating LGB variables
+ Calling hinterp_grapes2lga
+ hinterp_grapes2lga: LGA Press data from center of LAPS domain
+ KP  PRESS     HEIGHT   TEMP   SH       U       V      OM
+ --- --------  -------  -----  -------  ------  ------ -----------
+  1 110000.0  -16468.  462.8  0.00000   -14.8     4.8   0.00000000
+  2 107500.0  -16157.  461.6  0.00000   -14.8     4.8   0.00000000
+  3 105000.0  -15840.  460.4  0.00000   -14.8     4.8   0.00000000
+  4 102500.0  -15516.  459.2  0.00000   -14.8     4.8   0.00000000
+  5 100000.0  -15184.  458.0  0.00000   -14.8     4.8   0.00000000
+  6  97500.0  -14846.  456.7  0.00000   -14.8     4.8   0.00000000
+  7  95000.0  -14499.  455.4  0.00000   -14.8     4.8   0.00000000
+  8  92500.0  -14144.  454.1  0.00000   -14.8     4.8   0.00000000
+  9  90000.0  -13781.  452.7  0.00000   -14.8     4.8   0.00000000
+ 10  87500.0  -13408.  451.3  0.00000   -14.8     4.8   0.00000000
+ 11  85000.0  -13026.  449.9  0.00000   -14.8     4.8   0.00000000
+ 12  82500.0  -12633.  448.4  0.00000   -14.8     4.8   0.00000000
+ 13  80000.0  -12230.  446.8  0.00000   -14.8     4.8   0.00000000
+ 14  77500.0  -11816.  445.3  0.00000   -14.8     4.8   0.00000000
+ 15  75000.0  -11390.  443.6  0.00000   -14.8     4.8   0.00000000
+ 16  72500.0  -10950.  441.9  0.00000   -14.8     4.8   0.00000000
+ 17  70000.0  -10498.  440.2  0.00000   -14.8     4.8   0.00000000
+ 18  67500.0  -10030.  438.3  0.00000   -14.8     4.8   0.00000000
+ 19  65000.0   -9547.  436.5  0.00000   -14.8     4.8   0.00000000
+ 20  62500.0   -9047.  434.5  0.00000   -14.8     4.8   0.00000000
+ 21  60000.0   -8530.  432.5  0.00000   -14.8     4.8   0.00000000
+ 22  57500.0   -7992.  430.3  0.00000   -14.8     4.8   0.00000000
+ 23  55000.0   -7434.  428.1  0.00000   -14.8     4.8   0.00000000
+ 24  52500.0   -6853.  425.8  0.00000   -14.8     4.8   0.00000000
+ 25  50000.0   -6247.  423.3  0.00000   -14.8     4.8   0.00000000
+ 26  47500.0   -5614.  420.8  0.00000   -14.8     4.8   0.00000000
+ 27  45000.0   -4950.  418.1  0.00000   -14.8     4.8   0.00000000
+ 28  42500.0   -4253.  415.2  0.00000   -14.8     4.8   0.00000000
+ 29  40000.0   -3519.  412.2  0.00000   -14.8     4.8   0.00000000
+ 30  37500.0   -2744.  409.0  0.00000   -14.8     4.8   0.00000000
+ 31  35000.0   -1922.  405.5  0.00000   -14.8     4.8   0.00000000
+ 32  32500.0   -1047.  401.8  0.00000   -14.8     4.8   0.00000000
+ 33  30000.0    -110.  397.8  0.00000   -14.8     4.8   0.00000000
+ 34  27500.0     897.  393.4  0.00000   -14.8     4.8   0.00000000
+ 35  25000.0    1988.  388.7  0.00000   -14.8     4.8   0.00000000
+ 36  22500.0    3178.  383.4  0.00000   -14.8     4.8   0.00000000
+ 37  20000.0    4489.  377.5  0.00000   -14.8     4.8   0.00000000
+ 38  17500.0    5951.  370.8  0.00000   -14.8     4.8   0.00000000
+ 39  15000.0    7606.  363.1  0.00000   -14.8     4.8   0.00000000
+ 40  12500.0    9519.  354.0  0.00000   -14.8     4.8   0.00000000
+ 41  10000.0   11794.  342.9  0.00000   -14.8     4.8   0.00000000
+ 42   7500.0   14620.  328.5  0.00000   -14.8     4.8   0.00000000
+ 43   5000.0   18397.  308.2  0.00000   -14.8     4.8   0.00000000
+ Adjusting WRF surface to LAPS surface
+ Deallocating GRAPES pressure-level vars
+ Deallocating GRAPES surface vars
+ Deallocating LAPS static vars
+ Creating derived pressure arrays
+ slp/psf/p/tsf/tsk/dsf/rsf/usf/vsf:   29715.5312       8147.82373       29715.5312       275.530396       326.441528       192.345688       0.00000000      -14.7786427       4.76718473    
+XIE Min u3:    -22.464 Max u3:     -9.228 Min v3:      0.771 Max v3:      6.618
+ Writing LGA at time:   2064524400  2064524400  File times:   2064506400  2064528000
+  LGA file = /Users/xiey/developments/da/laps/lapsdataroot_h/lapsprd/lga//2515323000000.lga
+ HT
+ Here: get_grid_dim_xy
+ write_laps ABORTED!
+  LAPS will currently only work on a PRESSURE vertical grid
+  Make sure VERTICAL_GRID is set to PRESSURE in nest7grid.parms
+ Error writing interpolated data to LAPS database.
+ grapes2lga_griddata: Error writing LGA
+
+ Looping through models (lga-1):           0           1           0           1
+ Looping through models (lga-2):           0           2           0           0
+ Calling get_acceptable_files 
+ bgpath:   
+ cmodel:   
+ bgmodel:             0
+ lgb_only:  F
+
+ ----------------------------------------------
+ get_acceptable_files: use_analysis / use_forecast =  F T
+ ----------------------------------------------
+Warning from scandir - No files returned
+  get_file_times - # files =            0
+ Total (nvaltimes) =            1
+ Variable bg_files = 0, return to main
+
+ No Acceptable files found for background model:
+ bgpath =  
+ bgmodel =            0
+
+
+ ----------------------------------------------
+ Start time-plus           1 cycle time interpolation
+ ----------------------------------------------
+
+ i4time_now before increment =   2064524400  2064528000        3600           1
+ processing background data for 251540000
+
+ Looping through models (lga-1):         -99           1           0           0
+ Looping through models (lga-2):         -99           1           0           0
+ Calling get_bkgd_files for GRAPES binary files
+ bgpath:   /Volumes/Mac2Backup/caseStudy/250603/input/model
+ bgmodel:            14
+ cmodel:   GRAPES
+  Sort_fn: names sorted, non_numeric/total =            4           4
+   Found GRAPES file: /Volumes/Mac2Backup/caseStudy/250603/input/model/grapesinput2025060218
+   Found file: grapesinput2025060218
+   Path length:           48          70
+   Found GRAPES file: /Volumes/Mac2Backup/caseStudy/250603/input/model/grapesinput2025060300
+   Found file: grapesinput2025060300
+   Path length:           48          70
+   Found Namelist file: /Volumes/Mac2Backup/caseStudy/250603/input/model/namelist.input.si2025060218
+   Found file: namelist.input.si2025060218
+   Path length:           48          76
+   Found Namelist file: /Volumes/Mac2Backup/caseStudy/250603/input/model/namelist.input.si2025060300
+   Found file: namelist.input.si2025060300
+   Path length:           48          76
+ GRAPES file: /Volumes/Mac2Backup/caseStudy/250603/input/model/grapesinput2025060218
+   Checking file: grapesinput 2025 060218
+ GRAPES file time string: 2025-06-02_18:00:00.0000 -> i4time:   2064506400  2064528000
+ GRAPES file: /Volumes/Mac2Backup/caseStudy/250603/input/model/grapesinput2025060300
+   Checking file: grapesinput 2025 060300
+ GRAPES file time string: 2025-06-03_00:00:00.0000 -> i4time:   2064528000  2064528000
+ File matches time needed:            2 /Volumes/Mac2Backup/caseStudy/250603/input/model/grapesinput2025060300
+ Found            1  GRAPES files. Will read the first one: /Volumes/Mac2Backup/caseStudy/250603/input/model/grapesinput2025060300
+ GRAPES file: /Volumes/Mac2Backup/caseStudy/250603/input/model/grapesinput2025060300 i4time:   2064528000
+ reftime from GRAPES file: 2025-06-03_00:00:00
+ Reading GRAPES namelist file.../Volumes/Mac2Backup/caseStudy/250603/input/model/namelist.input.si2025060300
+Max zz:  29358.914 Min zz:     -2.715 Max ht:   5392.624 Min ht:     -2.715
+ Here: get_grid_dim_xy
+ LAPS dims: nxl,nyl,nzl =         1025         513          43
+
+ ======> Read_namelist_laps: lapsparms          43
+ ======>          File_name: /Users/xiey/developments/da/laps/lapsdataroot_h/static//nest7grid.parms
+
+     Reading in lat/lon/topo/land frac 
+
+  subroutine check_domain: checking latlon_to_rlapsgrid
+  check_domain: max_diff (gridpoints) =    6.66262861E-03  at i/j        1006          91
+  check_domain: max_diff (approx m)   =    6.66262865    
+  Checking rlapsgrid_to_latlon
+  check_domain: max_diff (degrees) =    6.02724067E-05  at i/j         841         261
+  check_domain: max_diff (approx m)   =    6.62996483    
+  measured grid spacing on earths surface at domain center is:   1000.47174    
+  calculated grid spacing on earths surface at domain center is:   1000.00006    
+  grid spacing on projection plane using "latlon_to_xy" is:   1000.00623    
+  calculated grid spacing on earths surface at single lambert latitude:   24.0000000       1000.00000    
+
+ GRAPES grid dimensions: nxw,nyw,nzw =          666         559          65
+ Extracting GRAPES model-level variables...           1
+ Extracting GRAPES surface fields...
+ Min/Max GRAPES 3D Pressure:   1327.38525       100788.102    
+ GRAPES model-level data at domain centre
+ K   PRESS     HEIGHT   TEMP   SH       U       V      OM
+ --- --------  -------  -----  -------  ------  ------ -----------
+  1   1367.2   28899.  226.5  0.00000   -11.8     4.5   0.00000000
+  2   1465.3   28433.  226.2  0.00000   -11.6     5.1   0.00000000
+  3   1572.0   27960.  225.9  0.00000   -11.3     5.5   0.00000000
+  4   1688.3   27481.  225.5  0.00000   -11.1     5.7   0.00000000
+  5   1815.2   26996.  225.0  0.00000   -10.8     5.6   0.00000000
+  6   1953.8   26504.  224.4  0.00000   -10.6     5.3   0.00000000
+  7   2105.4   26006.  223.6  0.00000   -10.3     4.6   0.00000000
+  8   2271.5   25501.  222.5  0.00000   -10.1     3.7   0.00000000
+  9   2453.9   24991.  221.1  0.00000    -9.8     2.6   0.00000000
+ 10   2654.6   24474.  219.5  0.00000    -9.5     1.6   0.00000000
+ 11   2876.1   23952.  217.7  0.00000    -9.1     0.7   0.00000000
+ 12   3120.8   23424.  215.7  0.00000    -8.6     0.2   0.00000000
+ 13   3391.9   22890.  213.4  0.00000    -8.1     0.1   0.00000000
+ 14   3692.8   22352.  211.1  0.00000    -7.5     0.3   0.00000000
+ 15   4027.5   21808.  208.6  0.00000    -7.1     0.7   0.00000000
+ 16   4400.6   21259.  206.0  0.00000    -6.8     1.1   0.00000000
+ 17   4817.3   20705.  203.4  0.00000    -6.9     1.5   0.00000000
+ 18   5283.4   20147.  200.6  0.00000    -7.4     1.6   0.00000000
+ 19   5806.0   19585.  197.7  0.00000    -8.0     1.3   0.00000000
+ 20   6393.4   19019.  194.6  0.00000    -8.1     0.8   0.00000000
+ 21   7055.1   18450.  191.4  0.00000    -7.0    -0.1   0.00000000
+ 22   7800.6   17877.  190.0  0.00000    -4.1    -1.1   0.00000000
+ 23   8635.5   17302.  190.0  0.00000    -0.4    -1.8   0.00000000
+ 24   9563.9   16725.  191.3  0.00000     3.2    -1.7   0.00000000
+ 25  10589.2   16145.  193.7  0.00000     5.6    -0.1   0.00000000
+ 26  11713.8   15564.  197.0  0.00000     6.6     2.6   0.00000000
+ 27  12939.4   14981.  201.2  0.00001     6.8     5.5   0.00000000
+ 28  14266.1   14398.  206.5  0.00001     6.7     7.5   0.00000000
+ 29  15692.3   13814.  212.2  0.00003     6.8     8.1   0.00000000
+ 30  17219.1   13231.  217.5  0.00004     7.2     7.2   0.00000000
+ 31  18851.3   12648.  222.4  0.00006     7.7     5.7   0.00000000
+ 32  20594.2   12067.  227.1  0.00015     8.3     4.2   0.00000000
+ 33  22451.8   11488.  231.9  0.00025     8.7     3.0   0.00000000
+ 34  24426.0   10910.  236.9  0.00039     8.7     2.1   0.00000000
+ 35  26518.0   10336.  241.5  0.00066     8.4     1.4   0.00000000
+ 36  28731.2    9765.  245.7  0.00092     7.9     0.7   0.00000000
+ 37  31070.2    9199.  249.4  0.00153     7.4    -0.1   0.00000000
+ 38  33538.9    8637.  252.8  0.00214     7.4    -0.9   0.00000000
+ 39  36140.3    8080.  255.9  0.00274     7.8    -1.7   0.00000000
+ 40  38877.1    7530.  258.7  0.00332     8.7    -2.2   0.00000000
+ 41  41750.9    6986.  261.5  0.00389    10.2    -2.1   0.00000000
+ 42  44759.6    6450.  264.6  0.00445    11.9    -1.8   0.00000000
+ 43  47897.4    5922.  267.9  0.00500    13.3    -1.6   0.00000000
+ 44  51021.9    5445.  270.9  0.00593    14.0    -1.7   0.00000000
+ 45  53967.9    5019.  273.2  0.00683    13.8    -2.2   0.00000000
+ 46  56835.5    4605.  274.9  0.00769    13.2    -2.6   0.00000000
+ 47  59745.3    4204.  276.2  0.00840    12.3    -2.8   0.00000000
+ 48  62687.1    3815.  277.8  0.00893    11.2    -2.5   0.00000000
+ 49  65644.9    3441.  279.8  0.00944     9.8    -2.2   0.00000000
+ 50  68600.2    3082.  282.2  0.00991     8.1    -2.2   0.00000000
+ 51  71534.0    2739.  284.2  0.00984     6.1    -2.8   0.00000000
+ 52  74430.5    2413.  285.0  0.00978     3.9    -3.9   0.00000000
+ 53  77276.5    2104.  284.8  0.00971     1.9    -5.0   0.00000000
+ 54  80055.9    1814.  283.9  0.00966     0.2    -5.9   0.00000000
+ 55  82750.1    1544.  282.4  0.00960    -1.0    -6.4   0.00000000
+ 56  85337.3    1295.  281.0  0.00993    -1.6    -6.5   0.00000000
+ 57  87789.6    1067.  281.9  0.01041    -1.6    -6.0   0.00000000
+ 58  90069.9     862.  284.6  0.01085    -1.4    -5.4   0.00000000
+ 59  92143.7     681.  288.3  0.01120    -1.1    -4.8   0.00000000
+ 60  93982.5     525.  290.7  0.01144    -0.9    -4.3   0.00000000
+ 61  95566.0     395.  291.5  0.01165    -0.7    -3.8   0.00000000
+ 62  96874.3     291.  291.3  0.01181    -0.6    -3.5   0.00000000
+ 63  97886.0     216.  290.8  0.01192    -0.6    -3.3   0.00000000
+ 64  98579.2     170.  290.4  0.01199    -0.5    -3.1   0.00000000
+ 65  99192.1     110.  289.2  0.01209    -0.5    -3.0   0.00000000
+Min t3_grapess:    183.252 Max t3_grapess:    304.668 Min v3_grapess:    -32.206 Max v3_grapess:     32.738
+ Allocating arrays for GRAPES on pressure levels
+ Calling vinterp_grapes2p
+ GRAPES Press data from center of GRAPES domain
+ KP  PRESS     HEIGHT   TEMP   SH       U       V      OM
+ --- --------  -------  -----  -------  ------  ------ -----------
+  1 110000.0  -16370.  462.3  0.00000   -11.8     4.5   0.00000000
+  2 107500.0  -16060.  461.2  0.00000   -11.8     4.5   0.00000000
+  3 105000.0  -15743.  460.0  0.00000   -11.8     4.5   0.00000000
+  4 102500.0  -15419.  458.8  0.00000   -11.8     4.5   0.00000000
+  5 100000.0  -15088.  457.5  0.00000   -11.8     4.5   0.00000000
+  6  97500.0  -14749.  456.3  0.00000   -11.8     4.5   0.00000000
+  7  95000.0  -14403.  455.0  0.00000   -11.8     4.5   0.00000000
+  8  92500.0  -14049.  453.6  0.00000   -11.8     4.5   0.00000000
+  9  90000.0  -13685.  452.3  0.00000   -11.8     4.5   0.00000000
+ 10  87500.0  -13313.  450.9  0.00000   -11.8     4.5   0.00000000
+ 11  85000.0  -12931.  449.4  0.00000   -11.8     4.5   0.00000000
+ 12  82500.0  -12540.  447.9  0.00000   -11.8     4.5   0.00000000
+ 13  80000.0  -12137.  446.4  0.00000   -11.8     4.5   0.00000000
+ 14  77500.0  -11723.  444.8  0.00000   -11.8     4.5   0.00000000
+ 15  75000.0  -11297.  443.2  0.00000   -11.8     4.5   0.00000000
+ 16  72500.0  -10858.  441.5  0.00000   -11.8     4.5   0.00000000
+ 17  70000.0  -10406.  439.7  0.00000   -11.8     4.5   0.00000000
+ 18  67500.0   -9939.  437.9  0.00000   -11.8     4.5   0.00000000
+ 19  65000.0   -9456.  436.0  0.00000   -11.8     4.5   0.00000000
+ 20  62500.0   -8957.  434.0  0.00000   -11.8     4.5   0.00000000
+ 21  60000.0   -8440.  432.0  0.00000   -11.8     4.5   0.00000000
+ 22  57500.0   -7903.  429.9  0.00000   -11.8     4.5   0.00000000
+ 23  55000.0   -7346.  427.6  0.00000   -11.8     4.5   0.00000000
+ 24  52500.0   -6765.  425.3  0.00000   -11.8     4.5   0.00000000
+ 25  50000.0   -6160.  422.9  0.00000   -11.8     4.5   0.00000000
+ 26  47500.0   -5527.  420.3  0.00000   -11.8     4.5   0.00000000
+ 27  45000.0   -4864.  417.6  0.00000   -11.8     4.5   0.00000000
+ 28  42500.0   -4168.  414.8  0.00000   -11.8     4.5   0.00000000
+ 29  40000.0   -3435.  411.7  0.00000   -11.8     4.5   0.00000000
+ 30  37500.0   -2661.  408.5  0.00000   -11.8     4.5   0.00000000
+ 31  35000.0   -1840.  405.0  0.00000   -11.8     4.5   0.00000000
+ 32  32500.0    -965.  401.3  0.00000   -11.8     4.5   0.00000000
+ 33  30000.0     -30.  397.3  0.00000   -11.8     4.5   0.00000000
+ 34  27500.0     976.  393.0  0.00000   -11.8     4.5   0.00000000
+ 35  25000.0    2065.  388.2  0.00000   -11.8     4.5   0.00000000
+ 36  22500.0    3254.  383.0  0.00000   -11.8     4.5   0.00000000
+ 37  20000.0    4564.  377.1  0.00000   -11.8     4.5   0.00000000
+ 38  17500.0    6024.  370.4  0.00000   -11.8     4.5   0.00000000
+ 39  15000.0    7677.  362.7  0.00000   -11.8     4.5   0.00000000
+ 40  12500.0    9588.  353.6  0.00000   -11.8     4.5   0.00000000
+ 41  10000.0   11860.  342.4  0.00000   -11.8     4.5   0.00000000
+ 42   7500.0   14681.  328.0  0.00000   -11.8     4.5   0.00000000
+ 43   5000.0   18453.  307.7  0.00000   -11.8     4.5   0.00000000
+Min u3_grapesp:    -35.023 Max u3_grapesp:      4.857 Min v3_grapesp:     -4.364 Max v3_grapesp:      8.593
+ Deallocating GRAPES model-level vars
+ Allocating LGA variables
+ Allocating LGB variables
+ Calling hinterp_grapes2lga
+ hinterp_grapes2lga: LGA Press data from center of LAPS domain
+ KP  PRESS     HEIGHT   TEMP   SH       U       V      OM
+ --- --------  -------  -----  -------  ------  ------ -----------
+  1 110000.0  -16417.  462.4  0.00000   -15.7     1.1   0.00000000
+  2 107500.0  -16106.  461.3  0.00000   -15.7     1.1   0.00000000
+  3 105000.0  -15789.  460.1  0.00000   -15.7     1.1   0.00000000
+  4 102500.0  -15465.  458.9  0.00000   -15.7     1.1   0.00000000
+  5 100000.0  -15134.  457.6  0.00000   -15.7     1.1   0.00000000
+  6  97500.0  -14795.  456.4  0.00000   -15.7     1.1   0.00000000
+  7  95000.0  -14449.  455.1  0.00000   -15.7     1.1   0.00000000
+  8  92500.0  -14094.  453.7  0.00000   -15.7     1.1   0.00000000
+  9  90000.0  -13731.  452.4  0.00000   -15.7     1.1   0.00000000
+ 10  87500.0  -13359.  451.0  0.00000   -15.7     1.1   0.00000000
+ 11  85000.0  -12977.  449.5  0.00000   -15.7     1.1   0.00000000
+ 12  82500.0  -12585.  448.0  0.00000   -15.7     1.1   0.00000000
+ 13  80000.0  -12182.  446.5  0.00000   -15.7     1.1   0.00000000
+ 14  77500.0  -11768.  444.9  0.00000   -15.7     1.1   0.00000000
+ 15  75000.0  -11342.  443.3  0.00000   -15.7     1.1   0.00000000
+ 16  72500.0  -10903.  441.6  0.00000   -15.7     1.1   0.00000000
+ 17  70000.0  -10451.  439.8  0.00000   -15.7     1.1   0.00000000
+ 18  67500.0   -9983.  438.0  0.00000   -15.7     1.1   0.00000000
+ 19  65000.0   -9501.  436.1  0.00000   -15.7     1.1   0.00000000
+ 20  62500.0   -9001.  434.1  0.00000   -15.7     1.1   0.00000000
+ 21  60000.0   -8484.  432.1  0.00000   -15.7     1.1   0.00000000
+ 22  57500.0   -7947.  430.0  0.00000   -15.7     1.1   0.00000000
+ 23  55000.0   -7390.  427.8  0.00000   -15.7     1.1   0.00000000
+ 24  52500.0   -6809.  425.4  0.00000   -15.7     1.1   0.00000000
+ 25  50000.0   -6203.  423.0  0.00000   -15.7     1.1   0.00000000
+ 26  47500.0   -5570.  420.4  0.00000   -15.7     1.1   0.00000000
+ 27  45000.0   -4907.  417.7  0.00000   -15.7     1.1   0.00000000
+ 28  42500.0   -4211.  414.9  0.00000   -15.7     1.1   0.00000000
+ 29  40000.0   -3478.  411.8  0.00000   -15.7     1.1   0.00000000
+ 30  37500.0   -2703.  408.6  0.00000   -15.7     1.1   0.00000000
+ 31  35000.0   -1882.  405.2  0.00000   -15.7     1.1   0.00000000
+ 32  32500.0   -1007.  401.5  0.00000   -15.7     1.1   0.00000000
+ 33  30000.0     -72.  397.4  0.00000   -15.7     1.1   0.00000000
+ 34  27500.0     935.  393.1  0.00000   -15.7     1.1   0.00000000
+ 35  25000.0    2024.  388.3  0.00000   -15.7     1.1   0.00000000
+ 36  22500.0    3213.  383.1  0.00000   -15.7     1.1   0.00000000
+ 37  20000.0    4523.  377.2  0.00000   -15.7     1.1   0.00000000
+ 38  17500.0    5984.  370.5  0.00000   -15.7     1.1   0.00000000
+ 39  15000.0    7638.  362.8  0.00000   -15.7     1.1   0.00000000
+ 40  12500.0    9549.  353.7  0.00000   -15.7     1.1   0.00000000
+ 41  10000.0   11821.  342.5  0.00000   -15.7     1.1   0.00000000
+ 42   7500.0   14644.  328.1  0.00000   -15.7     1.1   0.00000000
+ 43   5000.0   18417.  307.9  0.00000   -15.7     1.1   0.00000000
+ Adjusting WRF surface to LAPS surface
+ Deallocating GRAPES pressure-level vars
+ Deallocating GRAPES surface vars
+ Deallocating LAPS static vars
+ Creating derived pressure arrays
+ slp/psf/p/tsf/tsk/dsf/rsf/usf/vsf:   29814.2012       26005.6758       29814.2012       383.557587       387.855255       189.715576       0.00000000      -15.7322693       1.05679810    
+XIE Min u3:    -21.217 Max u3:     -9.681 Min v3:     -1.386 Max v3:      8.068
+ Writing LGA at time:   2064528000  2064528000  File times:   2064528000  2064528000
+  LGA file = /Users/xiey/developments/da/laps/lapsdataroot_h/lapsprd/lga//2515400000000.lga
+ HT
+ Here: get_grid_dim_xy
+ write_laps ABORTED!
+  LAPS will currently only work on a PRESSURE vertical grid
+  Make sure VERTICAL_GRID is set to PRESSURE in nest7grid.parms
+ Error writing interpolated data to LAPS database.
+ grapes2lga_griddata: Error writing LGA
+
+ Looping through models (lga-1):           0           1           0           1
+ Looping through models (lga-2):           0           2           0           0
+ Calling get_acceptable_files 
+ bgpath:   
+ cmodel:   
+ bgmodel:             0
+ lgb_only:  F
+
+ ----------------------------------------------
+ get_acceptable_files: use_analysis / use_forecast =  F T
+ ----------------------------------------------
+Warning from scandir - No files returned
+  get_file_times - # files =            0
+ Total (nvaltimes) =            1
+ Variable bg_files = 0, return to main
+
+ No Acceptable files found for background model:
+ bgpath =  
+ bgmodel =            0
+
+ Number of hinterp lga/lgb files written =            0
+ No acceptable background model found.

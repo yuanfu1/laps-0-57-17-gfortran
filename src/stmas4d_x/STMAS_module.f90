@@ -160,6 +160,7 @@ MODULE STMAS
   NAMELIST /STMAS_configure/STMAS_start_grdpts,STMAS_numlevels, &
                             STMAS_iters,STMAS_time_window,STMAS_debugging
   NAMELIST /STMAS_variables/STMAS_maxobs,STMAS_numvars,STMAS_varnames, &
+                            STMASFC_varnames, &
                             STMAS_radius,STMAS_inc, &
                             STMAS_thresholds,STMAS_stddev,STMAS_penal,STMAS_smooth
 

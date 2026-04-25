@@ -18,13 +18,14 @@ RM=rm -f
 
 .SUFFIXES: .o .f .a .exe
 
+# Prevent make from deleting .o files after building
+.PRECIOUS: %.o
+
 LIB = libverif.a
 DEBUGLIB = libdebugverif.a
 ARCHIVE = ar rv
 .f.o:
-		$(RM) $@
 		$(FC) -c $(FFLAGS) $(INC) $*.f
-		$(ARCHIVE) $(LIB) $(<:.f=.o)
 
 
 EXE1= gen_verif_raob.exe
@@ -42,16 +43,19 @@ MAIN1 = gen_verif_raob.f
 MAIN2 = gen_verif_prof.f
 
 OBJS=$(SRC:.f=.o)
+MAIN1_OBJ=$(MAIN1:.f=.o)
+MAIN2_OBJ=$(MAIN2:.f=.o)
 
 all:	$(EXE1) $(EXE2)
 
-$(EXE1):$(OBJS)
-	$(FC) -o $(EXE1) $(FFLAGS) $(MAIN1) -I$(SRCROOT)/src/include $(LIB) $(LAPSLIBS) $(OTHERLIBS) $(MTHERMOLIB) $(UTILLIB);
-	rm -f *.o
+$(LIB): $(OBJS)
+	$(ARCHIVE) $(LIB) $(OBJS)
 
-$(EXE2):$(OBJS)
-	$(FC) -o $(EXE2) $(FFLAGS) $(MAIN2) -I$(SRCROOT)/src/include $(LIB) $(LAPSLIBS) $(OTHERLIBS) $(MTHERMOLIB) $(UTILLIB);
-	rm -f *.o
+$(EXE1): $(MAIN1_OBJ) $(LIB) $(LAPSLIBS)
+	$(FC) -o $(EXE1) $(FFLAGS) $(MAIN1_OBJ) -I$(SRCROOT)/src/include $(LIB) $(LAPSLIBS) $(OTHERLIBS) $(MTHERMOLIB) $(UTILLIB)
+
+$(EXE2): $(MAIN2_OBJ) $(LIB) $(LAPSLIBS)
+	$(FC) -o $(EXE2) $(FFLAGS) $(MAIN2_OBJ) -I$(SRCROOT)/src/include $(LIB) $(LAPSLIBS) $(OTHERLIBS) $(MTHERMOLIB) $(UTILLIB)
 
 debug: $(SRC)
 	$(RM) $(EXE1) $(RM) $(EXE2) ;

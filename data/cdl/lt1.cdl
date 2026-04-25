@@ -32,7 +32,7 @@ netcdf lt1 {
             t3:_FillValue = 1.e+37f;
             t3:long_name="temperature";
             t3:units="degrees Kelvin";
-            t3:valid_range=0.f, 100.f;
+            t3:valid_range=180.f, 340.f;
             t3:LAPS_var="T3";
             t3:lvl_coord="HPA";
             t3:LAPS_units="K";

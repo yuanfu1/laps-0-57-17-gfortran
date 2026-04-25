@@ -51,7 +51,7 @@ all: exe
 
 exe: $(ARCHIVE) $(EXE)
 
-$(EXE): $(ARCHIVE) $(SRC)
+$(EXE): $(ARCHIVE) $(LAPSLIBS)
 	$(FC) $(SRC) $(FFLAGS) $(LIB) $(LAPSLIBS) \
 	$(OTHERLIBS) $(DEGRIBLIBS) -o $@
 	rm -f *.o

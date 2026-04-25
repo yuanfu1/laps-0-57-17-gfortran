@@ -357,6 +357,9 @@ cdoc reads static/background.nl
       smooth_fields = .false.
       ntmin = -1
       ntmax = +1
+      bgpaths  = ' '
+      bgmodels = 0
+      cmodel   = ' '
       call get_directory(grid_fnam_common,nest7grid,len_dir)
       if(nest7grid(len_dir:len_dir).ne.'/') then
         len_dir=len_dir+1

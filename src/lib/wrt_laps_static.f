@@ -171,7 +171,7 @@ C
       goto 999
 C
 960   if (flag .ne. 1)
-     1   write(6,*) 'Error writing data to file...write aborted.'
+     1   write(6,*) 'Error writing sttc data to file...write aborted.'
       status = ERROR(2)
       goto 999
 C

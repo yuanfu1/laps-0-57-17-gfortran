@@ -48,8 +48,10 @@ RM=rm -f
 
 .SUFFIXES:              .f90 .o
 
+# Prevent make from deleting .o files after building
+.PRECIOUS: %.o
+
 .f90.o:
-			$(RM) $@
 			$(FC) -c $(FFLAGS) $(FREE) $(INC) $*.f90
 
 EXE=lfmpost.exe
@@ -71,9 +73,13 @@ FMOD = module_constants.o \
        module_vis5d.o \
        module_fire.o
 
+LAPSLIBS = $(SRCROOT)/src/lib/modules/libmodules.a \
+           $(SRCROOT)/src/lib/liblaps.a \
+           $(SRCROOT)/src/lib/grib/libgrib.a
+
 all:			$(EXE)
 
-$(EXE):			$(FOBJS) $(COBJS) $(FMOD)
+$(EXE):			$(FOBJS) $(COBJS) $(FMOD) $(LAPSLIBS)
 			$(FC) $(FREE) -o $@ $(FFLAGS) $(FOBJS) $(COBJS) \
                         $(FMOD) $(LAPSLIB) $(OTHERLIBS) $(EXTMODS) $(GRIBLIB) $(INC)
 

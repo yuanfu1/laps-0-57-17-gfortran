@@ -105,7 +105,7 @@ exe: lib
 	  (cd $$dir; if [ $$? != 0 ] ; then \
 	        echo "Exit status from cd $$dir was $$?" ; exit 1 ; fi ;\
 	  $(MAKE) all ; if [ $$? != 0 ] ; then \
-	        echo "Exit status from make was $$?" ; exit 1 ; fi ;) ;\
+	        echo "Exit status from make was $$?" ; exit 1 ; fi ;) || exit 1 ;\
 	  done
 
 lib:
@@ -116,7 +116,7 @@ lib:
 	  (cd $$dir; if [ $$? != 0 ] ; then \
 	        echo "Exit status from cd $$dir was $$?" ; exit 1 ; fi ;\
 	  $(MAKE) all ; if [ $$? != 0 ] ; then \
-	        echo "Exit status from make was $$?" ; exit 1 ; fi ;) ;\
+	        echo "Exit status from make was $$?" ; exit 1 ; fi ;) || exit 1 ;\
 	  done
 
 debuglib:
@@ -127,7 +127,7 @@ debuglib:
 	  (cd $$dir; if [ $$? != 0 ] ; then \
 	        echo "Exit status from cd $$dir was $$?" ; exit 1 ; fi ;\
 	  $(MAKE) debug ; if [ $$? != 0 ] ; then \
-	        echo "Exit status from make was $$?" ; exit 1 ; fi ;) ;\
+	        echo "Exit status from make was $$?" ; exit 1 ; fi ;) || exit 1 ;\
 	  done
 
 lapsplot: lib

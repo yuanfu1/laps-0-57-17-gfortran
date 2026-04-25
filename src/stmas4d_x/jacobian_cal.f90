@@ -23,6 +23,8 @@ USE STMAS, ONLY: ZTOP
   character*30, PARAMETER :: header = 'STMAS_LAPS_INPUT>vertical_z: '
   integer I,J,K,t,i1,i2,j1,j2
   real dzoz
+  real pres_1d(ngrid(3))
+  integer istatus_pres
 !
   do j=1,ngrid(2)
     do i=1,ngrid(1)
@@ -47,6 +49,23 @@ USE STMAS, ONLY: ZTOP
     enddo
   enddo
 !
+! bkgnd variable 4 ('P3' from LGA) contains height (m), not pressure.
+! Convert to LAPS pressure levels (Pa) for thv_cal.  HJ/fix
+  call get_pres_1d(0, ngrid(3), pres_1d, istatus_pres)
+  if (istatus_pres .ne. 1) then
+    print*, 'ERROR in jacobian_cal: get_pres_1d failed'
+    stop
+  endif
+  do t=1,ngrid(4)
+    do k=1,ngrid(3)
+      do j=1,ngrid(2)
+        do i=1,ngrid(1)
+          bkgnd(i,j,k,t,4) = pres_1d(k)
+        enddo
+      enddo
+    enddo
+  enddo
+!
 ! converting T to thv.  HJ 6/22/2011
   call thv_cal(ngrid(1),ngrid(2),ngrid(3),ngrid(4),bkgnd(1,1,1,1,4), &
                   bkgnd(1,1,1,1,6),bkgnd(1,1,1,1,5))
@@ -63,6 +82,7 @@ use STMAS, ONLY: kappa,P00
    integer i,j,k,t,nx,ny,nz,nt
    real tv,pres(nx,ny,nz,nt),temp(nx,ny,nz,nt),rv(nx,ny,nz,nt)
 
+  PRINT*,'Debugging: in thv_cal: kappa/P00: ', kappa, P00, temp(1,1,1,1), rv(1,1,1,1), pres(1,1,1,1)
    do t=1,nt
      do k=1,nz
        do j=1,ny

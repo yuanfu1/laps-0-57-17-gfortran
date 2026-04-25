@@ -1,0 +1,351 @@
+!> Driver for GRAPES LGA
+!!
+!!  History:
+!!   2026-03-28  Xie Yuanfu  Initial version
+!
+SUBROUTINE lga_driver_grapes(nx_laps,ny_laps,nz_laps,bgpath,cmodel, &
+                             use_analysis,forecast_length, &
+                             luse_sfc_bkgd, &
+                             i4time_now,smooth_fields,lga_status)
+  USE module_domain
+  USE NMLRead_m
+  USE map_utils
+  USE grapes_lga
+
+  IMPLICIT NONE
+  
+  ! Input parameters (matching lga_driver_wrfarw pattern)
+  INTEGER, INTENT(IN)          :: nx_laps,ny_laps,nz_laps
+  CHARACTER(LEN=*), INTENT(IN) :: bgpath
+  CHARACTER(LEN=12)            :: cmodel
+  LOGICAL, INTENT(IN)          :: use_analysis
+  INTEGER, INTENT(IN)          :: forecast_length
+  LOGICAL, INTENT(IN)          :: luse_sfc_bkgd
+  INTEGER, INTENT(IN)          :: i4time_now
+  LOGICAL, INTENT(IN)          :: smooth_fields
+  INTEGER, INTENT(OUT)         :: lga_status
+
+  ! Local variables
+  INTEGER             :: total_files, grapes_files, i, fh, istatus
+  INTEGER, PARAMETER  :: max_files = 500
+  CHARACTER(LEN=256)  :: all_files(max_files)
+  INTEGER             :: files_i4time(2)  
+  CHARACTER(LEN=256)  :: filenames(4) ! filenames(4) is used to store up to 3 GRAPES files plus 1 namelist file (if found) for later use
+  CHARACTER(LEN=19)   :: reftime
+  CHARACTER(LEN=13)   :: reftime13(2)
+  INTEGER*8           :: disp
+  INTEGER*4           :: mdate(5), itimestep
+  REAL*8              :: dt, a ! time interpolation coefficient: a
+  
+  TYPE(domain_t), ALLOCATABLE :: grid(:)
+
+  CALL get_acceptable_grapes(bgpath, i4time_now, grapes_files, files_i4time, filenames)
+
+  ! Read these files if found, i.e. grapes_files > 0: Yuanfu Xie 2026-03-29
+  fh = 333  ! File handle for reading GRAPES files, can be modified as needed
+
+  IF (grapes_files .GT. 0) THEN
+    PRINT *, "Found ", grapes_files, " GRAPES files. Will read the first one: ", TRIM(filenames(1))
+  ELSE
+    PRINT *, "No GRAPES file found in the specified path: ", TRIM(bgpath)
+    lga_status = -1
+    RETURN
+  END IF
+  ALLOCATE(grid(grapes_files))
+
+  DO i = 1,grapes_files
+    PRINT *, "GRAPES file: ", TRIM(filenames(i)), " i4time: ", files_i4time(i)
+
+    ! Open grapes file and read time information:
+    OPEN(fh, file=TRIM(filenames(i)), FORM='unformatted', STATUS='unknown', &
+      ACCESS='STREAM', ACTION='read', convert="big_endian")
+
+    ! Get time information from GRAPES file
+    disp = 5
+    ! Read the datetime
+    read (fh, pos=disp) mdate
+    disp = disp + 20 + 2*4
+    WRITE(reftime, '(I4.4,"-",I2.2,"-",I2.2,"_",I2.2,":",I2.2,":",I2.2)') &
+      mdate(1), mdate(2), mdate(3), mdate(4), mdate(5), 0
+    PRINT*,'reftime from GRAPES file: ', reftime
+
+    reftime13(i) = reftime(1:4) // reftime(6:7) // reftime(9:13) // reftime(15:16)
+
+    itimestep = 0
+    dt = 0.0D0
+
+    ! Read the file data
+
+    PRINT*,'Reading GRAPES namelist file...', TRIM(filenames(4))
+    CALL initial_config(TRIM(filenames(4)), grid(i)%config)
+    CALL getLocalIndices(grid(i))
+    CALL alloc_grid_memory(grid(i))
+
+    grid(i)%config%start_year = mdate(1)
+    grid(i)%config%start_month = mdate(2)
+    grid(i)%config%start_day = mdate(3)
+    grid(i)%config%start_hour = mdate(4)
+    grid(i)%config%start_minute = mdate(5)
+    grid(i)%config%start_second = 0
+
+    ! Read the file data
+    disp = disp - 8
+    CALL skip_records(fh, disp, 9); read (fh, pos=disp + 8) grid(i)%zz ! zz
+    CALL skip_records(fh, disp); read (fh, pos=disp + 8) grid(i)%pip ! pip
+    CALL skip_records(fh, disp); read (fh, pos=disp + 8) grid(i)%pi ! pi
+    CALL skip_records(fh, disp); read (fh, pos=disp + 8) grid(i)%u ! u
+    CALL skip_records(fh, disp); read (fh, pos=disp + 8) grid(i)%v ! v
+    CALL skip_records(fh, disp); ! read (fh, pos=disp + 8) grid(i)%wzet ! wzet
+    CALL skip_records(fh, disp); read (fh, pos=disp + 8) grid(i)%thp ! thp
+    CALL skip_records(fh, disp); read (fh, pos=disp + 8) grid(i)%th ! th
+    CALL skip_records(fh, disp); read (fh, pos=disp + 8) grid(i)%q ! mois_2
+
+    CALL skip_records(fh, disp, 2)
+    CALL skip_records(fh, disp, 2)
+    CALL skip_records(fh, disp, 5)
+
+    CALL skip_records(fh, disp); read (fh, pos=disp + 8) grid(i)%tsk ! tsk
+    CALL skip_records(fh, disp); ! read (fh, pos=disp + 8) grid(i)%ps ! ps
+
+    CALL skip_records(fh, disp)      !  psea
+    CALL skip_records(fh, disp)      !  u10
+    CALL skip_records(fh, disp)      !  v10
+    CALL skip_records(fh, disp)      !  t2
+    CALL skip_records(fh, disp)      !  q2
+    CALL skip_records(fh, disp); read (fh, pos=disp + 8) grid(i)%ht ! ht
+
+    CALL skip_records(fh, disp)     ! Tmn
+    CALL skip_records(fh, disp); read (fh, pos=disp + 8) grid(i)%xland !xland
+    CALL skip_records(fh, disp)
+    CALL skip_records(fh, disp); read (fh, pos=disp + 8) grid(i)%snowc !snowc
+    CALL skip_records(fh, disp); read (fh, pos=disp + 8) grid(i)%xice !xice
+    CALL skip_records(fh, disp); ! read (fh, pos=disp + 8) grid(i)%xlat !xlat
+    CALL skip_records(fh, disp); ! read (fh, pos=disp + 8) grid(i)%xlong !xlong
+    CALL skip_records(fh, disp); read (fh, pos=disp + 8) grid(i)%soil_type !soil_type
+    CALL skip_records(fh, disp); read (fh, pos=disp + 8) grid(i)%veg_fraction !veg_fraction
+
+    CALL skip_records(fh, disp, 4)
+    CALL skip_records(fh, disp, 13)
+    CALL skip_records(fh, disp, 10)
+    CALL skip_records(fh, disp); 
+    read (fh, pos=disp + 8) grid(i)%zh !zh
+
+    CLOSE(fh)
+  END DO
+
+  ! If interpolation is needed
+  IF (grapes_files .GT. 1) THEN
+    PRINT *, "Multiple GRAPES files found. Interpolation between files is needed but not implemented yet."
+    ! Implement interpolation logic here as needed, e.g., linear interpolation between the two closest time steps
+    PRINT*,'I4Times: ', files_i4time(1), ' ', files_i4time(2), ' i4time_needed: ', i4time_now
+    a = (i4time_now-files_i4time(2)) / REAL(files_i4time(1)-files_i4time(2))
+    grid(1)%thp = grid(1)%thp*a + grid(2)%thp*(1.0D0-a)
+    grid(1)%u   = grid(1)%u*a   + grid(2)%u  *(1.0D0-a)
+    grid(1)%v   = grid(1)%v*a   + grid(2)%v  *(1.0D0-a)
+    grid(1)%pi  = grid(1)%pi*a  + grid(2)%pi *(1.0D0-a)
+    grid(1)%ht  = grid(1)%ht*a  + grid(2)%ht *(1.0D0-a)
+  END IF
+  
+  ! Based on the above setting, grid(1) always holds the exact or interpolated GRAPES data for the time step needed.
+  ! LAPS module_map_utils.f90 defines projection = 0 as lat-lon projection, 
+  ! which is what GRAPES uses. This can be modified later if needed.
+  BLOCK
+    CHARACTER(LEN=200) :: laps_data_root
+    CHARACTER(LEN=10)      :: laps_domain_name
+    INTEGER :: projection
+    REAL*4 :: grid_space,lat1,lon1,stdlon,truelat1,truelat2
+    INTEGER :: idim,jdim
+    LOGICAL :: need_hinterp
+    TYPE(proj_info) :: grapgrid
+    REAL :: i_ll, j_ll, i_ul, j_ul, i_ur, j_ur, i_lr, j_lr
+
+    ! LAPS statics:
+    INTEGER            :: nxl, nyl, nzl
+    INTEGER            :: nxw,nyw,nzw
+    INTEGER            :: bg_valid_time, i4reftime
+    INTEGER            :: tau_hr, tau_min, tau_sec
+    INTEGER, EXTERNAL  :: cvt_wfo_fname13_i4time
+    REAL               :: redp_lvl
+    REAL               :: rmissingflag
+    REAL, ALLOCATABLE  :: pr_laps(:), lat(:,:), lon(:,:), topo_laps(:,:)
+    
+    ! LGA output variables (3D)
+    REAL, ALLOCATABLE  :: t3(:,:,:), sh(:,:,:), u3(:,:,:), v3(:,:,:), om(:,:,:)
+    
+    ! LGB output variables (2D surfaces)
+    REAL, ALLOCATABLE  :: dsf(:,:), rsf(:,:), psf(:,:), slp(:,:), p(:,:), pcp(:,:)
+
+    ! Get some LAPS setup stuff
+    CALL find_domain_name(laps_data_root,laps_domain_name,istatus)
+    print *, "LAPS_DATA_ROOT = ", TRIM(laps_data_root)
+    print *, "DOMAIN NAME = ", TRIM(laps_domain_name)
+  
+    CALL get_grid_dim_xy(nxl,nyl,istatus)
+    IF (istatus .NE. 1) THEN
+      PRINT *, "Could not get LAPS xy dims"
+      RETURN
+    ENDIF
+    CALL get_laps_dimensions(nzl,istatus)
+    IF (istatus .NE. 1) THEN
+      PRINT *, "Could not get LAPS z dim"
+      RETURN
+    ENDIF
+    print *, "Dims:   ", nxl,nyl,nzl
+    CALL get_r_missing_data(rmissingflag,istatus) 
+    CALL get_laps_redp(redp_lvl,istatus)
+
+    ! Allocate LAPS static fields
+    IF (.NOT. ALLOCATED(pr_laps))   ALLOCATE(pr_laps(nzl))
+    IF (.NOT. ALLOCATED(lat))       ALLOCATE(lat(nxl,nyl))
+    IF (.NOT. ALLOCATED(lon))       ALLOCATE(lon(nxl,nyl))
+    IF (.NOT. ALLOCATED(topo_laps)) ALLOCATE(topo_laps(nxl,nyl))
+    CALL get_laps_domain(nxl,nyl,laps_domain_name,lat,lon,topo_laps,istatus)
+    IF (istatus .NE. 1) THEN
+      PRINT *, "Error reading LAPS static info."
+      RETURN
+    ENDIF
+    CALL get_pres_1d(i4time_now,nzl,pr_laps,istatus)
+    IF (istatus .NE. 1) THEN
+      PRINT *, "Error reading LAPS pressure levels"
+      RETURN
+    ENDIF
+
+    ! Allocate LGA output arrays (3D)
+    IF (.NOT. ALLOCATED(t3)) ALLOCATE(t3(nxl,nyl,nzl))
+    IF (.NOT. ALLOCATED(sh)) ALLOCATE(sh(nxl,nyl,nzl))
+    IF (.NOT. ALLOCATED(u3)) ALLOCATE(u3(nxl,nyl,nzl))
+    IF (.NOT. ALLOCATED(v3)) ALLOCATE(v3(nxl,nyl,nzl))
+    IF (.NOT. ALLOCATED(om)) ALLOCATE(om(nxl,nyl,nzl))
+    
+    ! Allocate LGB output arrays (2D)
+    IF (.NOT. ALLOCATED(dsf)) ALLOCATE(dsf(nxl,nyl))
+    IF (.NOT. ALLOCATED(rsf)) ALLOCATE(rsf(nxl,nyl))
+    IF (.NOT. ALLOCATED(psf)) ALLOCATE(psf(nxl,nyl))
+    IF (.NOT. ALLOCATED(slp)) ALLOCATE(slp(nxl,nyl))
+    IF (.NOT. ALLOCATED(p))   ALLOCATE(p(nxl,nyl))
+    IF (.NOT. ALLOCATED(pcp)) ALLOCATE(pcp(nxl,nyl))
+    
+    ! Initialize to missing values
+    t3 = rmissingflag
+    sh = rmissingflag
+    u3 = rmissingflag
+    v3 = rmissingflag
+    om = rmissingflag
+    dsf = rmissingflag
+    rsf = rmissingflag
+    psf = rmissingflag
+    slp = rmissingflag
+    p = rmissingflag
+    pcp = rmissingflag
+    
+    ! Initialize time offset (modify based on GRAPES file metadata if needed)
+    tau_hr = 0
+    tau_min = 0
+    tau_sec = 0
+
+    projection = 0 ! latlon projection
+    grid_space = grid(1)%config%xd*1.0D6 ! Assuming xd and yd are the same, which is usually the case for GRAPES.
+    lat1 = grid(1)%config%ys_sn
+    lon1 = grid(1)%config%xs_we
+    stdlon = grid(1)%config%ys_sn + (grid(1)%config%e_sn - grid(1)%config%s_sn)*grid(1)%config%yd/2.0D0
+    truelat1 = grid(1)%config%cen_lat
+    truelat2 = grid(1)%config%cen_lat
+    idim = grid(1)%config%e_we - grid(1)%config%s_we + 1
+    jdim = grid(1)%config%e_sn - grid(1)%config%s_sn + 1
+
+    i4reftime = cvt_wfo_fname13_i4time(reftime13(1)) ! Always write out grid(1)
+    bg_valid_time = i4reftime + tau_hr * 3600 + tau_min * 60 + tau_sec
+
+    CALL map_set(projection, lat1, lon1, grid_space, stdlon, truelat1, truelat2, &
+                 idim, jdim, grapgrid)
+
+    ! Make sure LAPS domain covers the WRF domain, and see if it is an exact match
+    CALL latlon_to_ij(grapgrid,lat(1,1),lon(1,1),i_ll,j_ll)
+    CALL latlon_to_ij(grapgrid,lat(1,nyl),lon(1,nyl),i_ul,j_ul)
+    CALL latlon_to_ij(grapgrid,lat(nxl,nyl),lon(nxl,nyl),i_ur,j_ur)
+    CALL latlon_to_ij(grapgrid,lat(nxl,1),lon(nxl,1),i_lr,j_lr)
+    print *, "Location of LAPS corners in WRF domain:"
+    print *, i_ll,j_ll
+    print *, i_ul,j_ul
+    print *, i_ur,j_ur
+    print *, i_lr,j_lr
+    IF (NINT(i_ll) .LT. 1 .OR. NINT(j_ll) .LT. 1  .OR.  &
+        NINT(i_ul) .LT. 1 .OR. NINT(j_ul) .GT. nyw .OR. &
+        NINT(i_ur) .GT. nxw .OR. NINT(j_ur) .GT. nyw .OR. &
+        NINT(i_lr) .GT. nxw .OR. NINT(j_lr) .LT. 1) THEN
+      PRINT *, "LAPS Domain exceeds bounds of WRF background!"
+      istatus = 0 
+      RETURN
+    ELSE
+      need_hinterp = .true.
+      IF (NINT(i_ll) .EQ. 1 .AND. NINT(j_ll) .EQ. 1 .AND. &
+          NINT(i_ul) .EQ. 1 .AND. NINT(j_ul) .EQ. nyw .AND. &
+          NINT(i_ur) .EQ. nxw .AND. NINT(j_ur) .EQ. nyw .AND. &
+          NINT(i_lr) .EQ. nxw .AND. NINT(j_lr) .EQ. 1 ) THEN
+        PRINT *, "Exact match between LAPS and background.  No hinterp needed!"
+        need_hinterp = .false.
+      ENDIF
+    ENDIF
+
+    ! Interpolation:
+    ! Vertically interpolate
+    PRINT *, "Calling vinterp_grapes2p"
+    CALL vinterp_grapes2p(istatus)
+    IF (istatus .NE. 1) THEN
+      PRINT *, "Problem vertically interpolating GRAPES data"
+      RETURN
+    ENDIF
+    
+    ! Write the data out 
+    print *, "Writing LGA"
+
+    !!!! I should not direct pass grid components to the write_lga and write_lgb,
+    ! as they may need to be processed first (e.g., interpolation, unit conversion, etc.).
+    CALL write_lga(nxl,nyl,nzl,i4reftime,bg_valid_time,cmodel,rmissingflag, & ! xhb
+          pr_laps*0.01,grid(1)%ht,t3,sh,u3,v3,grid(1)%wzet,istatus)
+    IF(istatus .NE. 1) THEN
+      print *, "Error writing LGA"
+      RETURN
+    ENDIF
+
+    print *, "Writing LGB" ! modified by Wei-Ting (LGA -> LGB)
+    CALL write_lgb(nxl,nyl,i4reftime,bg_valid_time,cmodel,rmissingflag, &   ! xhb     
+      grid(1)%u10,grid(1)%v10,grid(1)%t2,grid(1)%tsk,rsf,psf,slp,dsf,p,pcp,istatus) ! added tsk & pcp by Wei-Ting (130312)
+    IF(istatus .NE. 1) THEN
+      print *, "Error writing LGB"
+      RETURN
+    ENDIF
+  END BLOCK
+
+  ! Return failure status for now
+  lga_status = 0
+
+  STOP
+
+CONTAINS
+
+  SUBROUTINE skip_records(fh, disp, nVars)
+      IMPLICIT NONE
+      INTEGER                   :: fh !file handle
+      INTEGER(8)                :: disp !file handle
+      INTEGER, optional         :: nVars !< Skips
+      INTEGER :: nSkip, i
+      INTEGER*4  :: trailMarker = 0, leadMarker
+
+      IF (PRESENT(nVars)) THEN
+        nSkip = nVars
+      ELSE
+        nSkip = 1
+      END IF
+
+      DO i = 1, nSkip
+        READ (fh, pos=disp) trailMarker !xland
+        disp = disp + 4
+        READ (fh, pos=disp) leadMarker !xland
+        ! PRINT *, 'trailMarker', trailMarker, 'leadMarker', leadMarker
+        disp = disp + 4 + leadMarker
+      END DO
+
+  END SUBROUTINE skip_records
+
+END SUBROUTINE lga_driver_grapes

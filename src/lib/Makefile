@@ -13,6 +13,9 @@ include $(SRCROOT)/src/include/makefile.inc
 LIB      = liblaps.a
 DEBUGLIB = libdebuglaps.a
 
+# Prevent make from deleting .o files after archiving
+.PRECIOUS: %.o
+
 
 #
 # machine_dependent needs to be first

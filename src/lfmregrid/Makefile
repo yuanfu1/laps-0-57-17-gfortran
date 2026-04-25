@@ -74,10 +74,12 @@ RM=rm -f
 
 .SUFFIXES:              .f90 .o .c .f .a .F .i .exe
 
+# Prevent make from deleting .o files after building
+.PRECIOUS: %.o
+
 %.o:%.mod
 
 .f90.o:
-			$(RM) $@
 			$(FC) -c $(FFLAGS) $(FREE) $(INC) $*.f90
 
 EXE=lfmregrid.exe
@@ -94,7 +96,7 @@ FMOD =
 
 all:			$(EXE)
 
-$(EXE):			$(FOBJS) $(COBJS) $(FMOD)
+$(EXE):			$(FOBJS) $(COBJS) $(LAPSLIBS)
 			$(FC) $(FREE) -o $@ $(FFLAGS) $(FOBJS) $(COBJS) \
 			$(BGDATALIB) $(LAPSLIBS) $(HDF5LIB) $(OTHERLIBS) $(DEGRIBLIBS) $(INC) -lm
 
@@ -109,28 +111,6 @@ debug:
          "GRIB2LIB      =       $(DBGRIB2LIB)"   \
          "FFLAGS90 	=	$(DBFLAGS90)"    \
          "EXTMODS       =       $(DBEXTMODS)" 	 )
-
-lfmpost.o:		lfmgrid.o 
-
-lfmutil.o:		lfmgrid.o constants.o
-
-interp.o:		lfmgrid.o
-
-mm5util.o:		lfmgrid.o 
-
-wrfutil.o:		lfmgrid.o constants.o
-
-nmmutil.o:		lfmgrid.o constants.o
-
-st4util.o:		lfmgrid.o constants.o
-
-metfunc.o:		constants.o
-
-ptfcst.o:		lfmgrid.o
-
-lfmwrite.o:		lfmgrid.o
-
-$(EXE):			$(SRCROOT)/src/lib/util/libutil.a $(SRCROOT)/src/lib/liblaps.a $(SRCROOT)/src/lib/modules/libmodules.a $(SRCROOT)/src/lib/radar/synp/libsynp.a                                          
 
 clean:
 			$(RM) *.o $(EXE) core
