@@ -54,31 +54,7 @@ SUBROUTINE STMAS_analysis
     num_controls = STMAS_mgrid%numgrid(1)*STMAS_mgrid%numgrid(2)* &
                    STMAS_mgrid%numgrid(3)*STMAS_mgrid%numgrid(4)*STMAS_numvars
 
-    WRITE(*,10) MINVAL(STMAS_mgrid%anal(:,:,:,:,1)),MAXVAL(STMAS_mgrid%anal(:,:,:,:,1)), &
-                MINVAL(STMAS_mgrid%anal(:,:,:,:,2)),MAXVAL(STMAS_mgrid%anal(:,:,:,:,2)), &
-                MINVAL(STMAS_mgrid%anal(:,:,:,:,3)),MAXVAL(STMAS_mgrid%anal(:,:,:,:,3)), &
-                MINVAL(STMAS_mgrid%anal(:,:,:,:,4)),MAXVAL(STMAS_mgrid%anal(:,:,:,:,4)), &
-                MINVAL(STMAS_mgrid%anal(:,:,:,:,5)),MAXVAL(STMAS_mgrid%anal(:,:,:,:,5)), mg
-  10 FORMAT(/,1X,'STMAS initial guess min max: ', /, &
-             ' u min, max: ',E12.5,' ',E12.5, /, &
-             ' v min, max: ',E12.5,' ',E12.5, /, &
-             ' w min, max: ',E12.5,' ',E12.5, /, &
-             ' p min, max: ',E12.5,' ',E12.5, /, &
-             ' t min, max: ',E12.5,' ',E12.5, /, &
-             ' at mg level: ',I3)
     CALL STMAS_minimizer(num_controls,mg,STMAS_mgrid)
-    WRITE(*,11) MINVAL(STMAS_mgrid%anal(:,:,:,:,1)),MAXVAL(STMAS_mgrid%anal(:,:,:,:,1)), &
-                MINVAL(STMAS_mgrid%anal(:,:,:,:,2)),MAXVAL(STMAS_mgrid%anal(:,:,:,:,2)), &
-                MINVAL(STMAS_mgrid%anal(:,:,:,:,3)),MAXVAL(STMAS_mgrid%anal(:,:,:,:,3)), &
-                MINVAL(STMAS_mgrid%anal(:,:,:,:,4)),MAXVAL(STMAS_mgrid%anal(:,:,:,:,4)), &
-                MINVAL(STMAS_mgrid%anal(:,:,:,:,5)),MAXVAL(STMAS_mgrid%anal(:,:,:,:,5)), mg
-  11 FORMAT(/,1X,'STMAS analysis min max: ', /, &
-             ' u min, max: ',E12.5,' ',E12.5, /, &
-             ' v min, max: ',E12.5,' ',E12.5, /, &
-             ' w min, max: ',E12.5,' ',E12.5, /, &
-             ' p min, max: ',E12.5,' ',E12.5, /, &
-             ' t min, max: ',E12.5,' ',E12.5, /, &
-             ' at mg level: ',I3)
 
 ! Copy STMAS_mgrid%anal only to the temporary array STMAS_tmgrid by calling STMAS_copyto,
 ! then call STMAS_memo_release_mgrid to deallocate memory. HJ 8/9/2011
@@ -118,11 +94,8 @@ SUBROUTINE STMAS_analysis
                                               1:STMAS_numvars),STMAS_final%numgrid, &
                                               STMAS_numvars)
 
-    print*,'final-tmgrid',STMAS_tmgrid%numgrid,' final-tgrid pressure: ', &
-      MINVAL(STMAS_tmgrid%anal(:,:,:,:,4)),MAXVAL(STMAS_tmgrid%anal(:,:,:,:,4))
-    print*,'final-num',STMAS_final%numgrid,' final pressure: ', &
-      MINVAL(STMAS_final%anal(:,:,:,:,4)),MAXVAL(STMAS_final%anal(:,:,:,:,4)), ' bkgd: ', &
-      MINVAL(STMAS_final%bkgd(:,:,:,:,4)),MAXVAL(STMAS_final%bkgd(:,:,:,:,4))
+    print*,'final-tmgrid',STMAS_tmgrid%numgrid
+    print*,'final-num',STMAS_final%numgrid
 
 ! Add the increment to the background as an initial guess:
     STMAS_final%anal = STMAS_final%anal+STMAS_final%bkgd
@@ -174,8 +147,8 @@ SUBROUTINE get_initial
       ENDIF
     ENDDO
   ENDDO
-!  print*,'nfinest',STMAS_mgrid%nfinest
-!  print*,'final%inc',STMAS_final%incr
+  print*,'nfinest',STMAS_mgrid%nfinest
+  print*,'final%inc',STMAS_final%incr
 
   !-----------------------------------------------------------------------------------------------
   ! Gridspacing:
@@ -338,6 +311,11 @@ SUBROUTINE projection(mg,grid_from)
           k2=(k-1)*STMAS_mgrid%incr(3)+1
           t2=(t-1)*STMAS_mgrid%incr(4)+1
           STMAS_mgrid%anal(i,j,k,t,1:STMAS_numvars) = grid_from%anal(i1,j1,k1,t1,1:STMAS_numvars)
+!          STMAS_mgrid%anal(i,j,k,t,1:STMAS_numvars) = grid_from%anal(i1,j1,k1,t1,1:STMAS_numvars) - &
+!                                                    STMAS_final%bkgd(i2,j2,k2,t2,1:STMAS_numvars)
+!          if(k .eq. 9 .and. t .eq. 1)then
+!            write(*,'(A6,6I4,e13.5)')'copy',i,j,i1,j1,i2,j2,STMAS_mgrid%anal(i,j,k,t,5)
+!          endif
         ENDDO
       ENDDO
     ENDDO

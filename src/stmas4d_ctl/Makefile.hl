@@ -17,100 +17,68 @@ RM = rm -f
 
 FLAG = $(FFLAGS)
 
-LAPSLIBS = $(SRCROOT)/src/lib/wind/libwind.a \
-           $(SRCROOT)/src/wind/libwind.a  \
-           $(SRCROOT)/src/balance/libqbalpe.a \
-           $(SRCROOT)/src/lib/temp/libtemp.a \
-           $(SRCROOT)/src/lib/liblaps.a  \
+LAPSLIBS = $(SRCROOT)/src/lib/liblaps.a  \
            $(SRCROOT)/src/lib/modules/libmodules.a  \
            $(SRCROOT)/src/lib/mthermo/libmthermo.a  \
            $(SRCROOT)/src/lib/util/libutil.a  \
            $(SRCROOT)/src/lib/goeslib/libgoeslib.a \
-           $(SRCROOT)/src/stmas4d_ctl/normal_subs/libnormal_subs.a \
-           $(SRCROOT)/src/stmas4d_ctl/observations/libstmas4d_obs.a 
+           $(SRCROOT)/src/stmas4d/normal_subs/libnormal_subs.a \
+           $(SRCROOT)/src/stmas4d/observations/libstmas4d_obs.a 
 
 DBLAPSLIBS = $(SRCROOT)/src/lib/libdebuglaps.a  \
              $(SRCROOT)/src/lib/modules/libdebugmodules.a  \
              $(SRCROOT)/src/lib/mthermo/libdebugmthermo.a  \
              $(SRCROOT)/src/lib/util/libdebugutil.a  \
              $(SRCROOT)/src/lib/goeslib/libdebuggoeslib.a \
-	     $(SRCROOT)/src/stmas4d_ctl/normal_subs/libnormal_subs_debug.a \
-	     $(SRCROOT)/src/stmas4d_ctl/observations/libstmas4d_obs.a
+	     $(SRCROOT)/src/stmas4d/normal_subs/libnormal_subs_debug.a \
+	     $(SRCROOT)/src/stmas4d/observations/libstmas4d_obs.a
 
 LAPSFC = $(SRCROOT)/src/sfc/libsfc.a
-STINC = -Inormal_subs -Iobservations
+#STINC = -Inormal_subs -Iobservations
+STINC = -Inormal_subs
 
 #=============================================================
 # STMAS:
 #=============================================================
 
 EXE = STMAS4D.exe
-ARC = libstmas4d.a
-DEBUGLIB = libdebugstmas4d.a
-
-ARCHIVE = $(ARC)($(addsuffix .o, $(basename $(SRC))))
-DBARCHIVE = $(DEBUGLIB)($(addsuffix .o, $(basename $(SRC))))
-
+ARC = STMAS4D.a
 
 OBJ=$(ARC)(STMAS_module.o) \
     $(ARC)(LAPS_ingest.o) \
     $(ARC)(get_analysis_window.o) \
     $(ARC)(grid_interpolation.o) \
     $(ARC)(STMAS_LAPS_input.o) \
-    $(ARC)(jacobian_cal.o) \
     $(ARC)(STMAS_analysis.o) \
     $(ARC)(STMAS_minimizer.o) \
-    $(ARC)(STMAS_costgrad.o) \
-    $(ARC)(STMAS_smooth.o) \
-    $(ARC)(mx_costgrad.o) \
-    $(ARC)(my_costgrad.o) \
-    $(ARC)(mz_costgrad.o) \
-    $(ARC)(cont_costgrad.o) \
-    $(ARC)(tv_costgrad.o) \
-    $(ARC)(qv_costgrad.o) \
     $(ARC)(routines.o) \
+    $(ARC)(STMAS_costgrad.o) \
     $(ARC)(STMAS_balcost.o) \
-    $(ARC)(STMAS_output.o)
+    $(ARC)(STMAS_main.o)
 
 SRC=STMAS_module.o \
     LAPS_ingest.o \
     get_analysis_window.o \
     grid_interpolation.o \
     STMAS_LAPS_input.o \
-    jacobian_cal.o \
     STMAS_analysis.o \
     STMAS_minimizer.o \
     STMAS_costgrad.o \
-    STMAS_smooth.o \
     routines.o \
     STMAS_balcost.o \
-    mx_costgrad.o \
-    my_costgrad.o \
-    mz_costgrad.o \
-    cont_costgrad.o \
-    tv_costgrad.o \
-    qv_costgrad.o \
-    STMAS_output.o \
     STMAS_main.o
     
-all: $(EXE) lib
+all: $(EXE)
 
-lib: $(ARC)
-
-$(EXE): $(SRC) $(ARC) STMAS_main.o $(LAPSLIBS)
+$(EXE): $(SRC) $(ARC) $(LAPSLIBS)
 	$(FC) $(FFLAGS) $(FREE) $(STINC) $(SRC) $(LAPSFC) $(LAPSLIBS) \
 	$(OTHERLIBS) -o $@
 
-$(ARC): $(ARCHIVE)
-	$(RANLIB) $@
+$(ARC): $(OBJ)
 
-XIE:
-	CFLAGS=$(DBCFLAGS)
-	FFLAGS=$(DBFLAGS)
-
-debug:  $(XIE) $(SRC) $(ARC) 
-	$(MAKE) lib ARC='$(DBLAPSLIBS)' ARCHIVE='$(DBARCHIVE)' \
-	CFLAGS='$(DBCFLAGS)' FFLAGS='$(DBFLAGS)' 
+debug: $(SRC)
+       echo 'xie Hello: ',FFLAGS
+	$(RM) $(EXE) ;
 	$(MAKE) LAPSLIBS='$(DBLAPSLIBS)' \
 	CFLAGS='$(DBCFLAGS)' FFLAGS='$(DBFLAGS)'
 
@@ -122,6 +90,5 @@ clean:
 
 .SUFFIXES:
 .SUFFIXES: .o .c .f90 .a .f
-.f90.o:;    $(FC) $(DBFLAGS) $(FREE) $(STINC) -c $*.f90
+.f90.o:;    $(FC) $(FFLAGS) $(FREE) $(STINC) -c $*.f90
 .f.o:;      $(FC) $(FFLAGS) -c $*.f
-#.f90.o:;    $(FC) $(FFLAGS) $(FREE) $(STINC) -c $*.f90

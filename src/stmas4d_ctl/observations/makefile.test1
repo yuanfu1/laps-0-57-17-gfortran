@@ -1,0 +1,76 @@
+# User options are in src/include/makefile.inc
+# This Makefile is designed for gnu make version 3.75 or newer
+# Please report problems to lapsbugs@fsl.noaa.gov
+#
+#
+
+#=============================================================
+#  LAPS environment:
+#=============================================================
+
+SRCROOT=../../../
+
+# make can't find pgf90, modify makefile.inc and copy to this dir. HJ 4/28/2011
+include $(SRCROOT)/src/include/makefile.inc
+
+RM = rm -f
+
+FLAG = $(FFLAGS)
+
+LAPSLIBS = $(SRCROOT)/src/stmas4d/observations/libstmas4d_obs.a  \
+           $(SRCROOT)/src/lib/liblaps.a  \
+           $(SRCROOT)/src/lib/modules/libmodules.a  \
+           $(SRCROOT)/src/lib/mthermo/libmthermo.a  \
+           $(SRCROOT)/src/lib/util/libutil.a  \
+           $(SRCROOT)/src/lib/goeslib/libgoeslib.a \
+           $(SRCROOT)/src/stmas4d/normal_subs/libnormal_subs.a \
+           ../libstmas4d.a ../obs_map/libstmas4d_map.a \
+           ../obscost/libstmas4dcost.a
+
+DBLAPSLIBS = $(SRCROOT)/src/stmas4d/observations/libdebugstmas4d_obs.a  \
+             $(SRCROOT)/src/lib/libdebuglaps.a  \
+             $(SRCROOT)/src/lib/modules/libdebugmodules.a  \
+             $(SRCROOT)/src/lib/mthermo/libdebugmthermo.a  \
+             $(SRCROOT)/src/lib/util/libdebugutil.a  \
+             $(SRCROOT)/src/lib/goeslib/libdebuggoeslib.a \
+	     $(SRCROOT)/src/stmas4d/normal_subs/libnormal_subs_debug.a \
+           ../libdebugstmas4d.a ../obs_map/libdebugstmas4d_map.a \
+           ../obscost/libdebugstmas4dcost.a
+STINC = -I../
+
+#=============================================================
+# STMAS:
+#=============================================================
+
+EXE = test_ingest.exe
+
+SRC= \
+    test_ingest_1.o
+    
+all: $(EXE)
+
+$(EXE): $(LAPSLIBS) $(SRC) 
+	$(FC) $(FFLAGS) $(FREE) $(STINC) $(SRC) $(LAPSFC) $(LAPSLIBS) \
+	$(OTHERLIBS) -o $@
+
+$(ARC): $(OBJ)
+
+XIE: 
+	CFLAGS=$(DBCFLAGS)
+	FFLAGS=$(DBFLAGS)
+
+debug: $(XIE) #$(SRC)
+	$(RM) $(EXE) ;
+	$(MAKE) -f makefile.test1 LAPSLIBS='$(DBLAPSLIBS)' \
+	CFLAGS='$(DBCFLAGS)' FFLAGS='$(DBFLAGS)'
+
+install: exe
+	$(INSTALL) $(EXE) $(INSTALLROOT)/bin/$(EXE)
+
+clean:
+	$(RM) $(EXE)  *.o *~ *# *.mod
+
+.SUFFIXES:
+.SUFFIXES: .o .c .f90 .a .f
+.f90.o:;    $(FC) $(FFLAGS) $(FREE) $(STINC) -c $*.f90
+.f.o:;      $(FC) $(FFLAGS) -c $*.f

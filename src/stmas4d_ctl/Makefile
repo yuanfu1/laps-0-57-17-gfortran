@@ -44,7 +44,7 @@ STINC = -Inormal_subs -Iobservations
 # STMAS:
 #=============================================================
 
-EXE = STMAS4D.exe
+EXE = STMAS4Dctl.exe
 ARC = libstmas4d.a
 DEBUGLIB = libdebugstmas4d.a
 
